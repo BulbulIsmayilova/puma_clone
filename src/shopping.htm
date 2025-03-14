@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+      .custom-select {
+        appearance: none; /* Webkit için */
+        -webkit-appearance: none; /* Safari/Chrome için */
+        -moz-appearance: none; /* Firefox için */
+        border: 1px solid #3b4047;
+        border-radius: 2px;
+        padding-right: 4.5rem; /* Sağdaki özel ok için boşluk */
+        padding-left: 0.8rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        position: relative;
+        background-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div
+      id="searchContainer"
+      class="fixed -z-1 invisible inset-0 opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="signinContainer"
+      class="fixed -z-[10] top-20 right-4 w-full opacity-0 duration-150 max-w-[320px] max-h-[400px] rounded-sm"
+    ></div>
+
+    <div
+      id="lgContainer"
+      class="fixed top-[88px] left-0 bottom-0 right-0 z-[-1] opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="sideContainer"
+      class="fixed -z-1 invisible inset-0 duration-300 opacity-0"
+    ></div>
+    <!-- Header -->
+
+    <div
+      id="SizeContainer"
+      class="fixed -z-[10] bg-[#00000080] inset-0 flex items-center justify-center py-5 bl:py-2 md:py-0 px-4 opacity-0 visible duration-300"
+    ></div>
+
+    <div
+      id="deleteContainer"
+      class="fixed -z-[10] bg-[#00000080] inset-0 py-[140px] hl:py-40 rounded-md px-4 visible opacity-0"
+    ></div>
+
+    <header class="sticky top-0 right-0 left-0 z-[900]"></header>
+    <main>
+      <div class="wrapper min-h-[50vh]">
+        <!-- <div class="flex flex-col gap-2 justify-center items-center py-32">
+          <div>
+            <img src="/src/assets/bigshopping.svg" alt="" />
+          </div>
+          <div class="pt-4 flex flex-col justify-center items-center">
+            <p class="text-[24px] sl:text-[28px]">
+              <b>Your Shopping Cart is Empty</b>
+            </p>
+            <p class="pt-1">
+              <span class="text-[16px]"
+                >Please
+                <a href="" class="uppercase underline text-[14px]"
+                  ><b>Sign in</b></a
+                >
+                to view your saved Cart</span
+              >
+            </p>
+          </div>
+        </div> -->
+
+        <div
+          class="flex flex-col gap-4 max-w-[768px] mx-auto sl:max-w-none sl:mx-0"
+        >
+          <div>
+            <h1 class="text-[24px] uppercase hl:text-[28px] lg:text-[32px]">
+              <b>My Shopping Cart</b>
+              <span id="listcount" class="text-[#C6C6C6]"></span>
+            </h1>
+          </div>
+
+          <div class="flex flex-col gap-4 sl:gap-8 sl:flex-row sl:items-start">
+            <div id="myList" class="sl:w-7/12"></div>
+
+            <div class="flex flex-col gap-1 sm:gap-2 sl:w-5/12">
+              <div>
+                <div
+                  class="border border-[#E5E7EB] py-2 rounded-sm flex items-center justify-center gap-2"
+                >
+                  <img src="/src/assets/truckgreen.svg" alt="" />
+                  <p
+                    class="text-[#008625] uppercase text-[14px] tracking-wider"
+                  >
+                    <b>You’ve earned free shipping</b>
+                  </p>
+                </div>
+                <div
+                  class="border border-[#E5E7EB] mt-2 py-2 rounded-sm flex items-center justify-center gap-2"
+                >
+                  <img src="/src/assets/circleright.svg" alt="" />
+                  <p
+                    class="text-[#6C6C6C] uppercase text-[14px] tracking-wider"
+                  >
+                    <b>Free returns on all qualifying orders.</b>
+                  </p>
+                </div>
+              </div>
+              <div>
+                <div class="bg-[#EEEEEE] my-5">
+                  <button
+                    onclick="toggleCartAccordion()"
+                    class="flex justify-between items-center p-5 sl:p-4 w-full"
+                  >
+                    <div>
+                      <span class="uppercase text-[16px] zl:text-[20px]"
+                        >Apply a promo code</span
+                      >
+                    </div>
+                    <div>
+                      <img
+                        src="/src/assets/downabsolute.svg"
+                        class="w-[20px] h-[20px] cart-icon"
+                        alt=""
+                      />
+                    </div>
+                  </button>
+                </div>
+                <div>
+                  <div class="flex gap-2 justify-between cart-accordion">
+                    <div class="h-[56px] w-full">
+                      <input
+                        type="text"
+                        placeholder="Enter a promo code"
+                        class="border border-[#3B4047] rounded-sm h-full w-full px-4"
+                      />
+                    </div>
+                    <button
+                      class="max-w-[127px] w-full h-[56px] border border-[#BDC1C5] bg-[#BDC1C5] rounded-sm uppercase"
+                    >
+                      <b class="text-[#3B4047]">Apply</b>
+                    </button>
+                  </div>
+                </div>
+                <div id="TotalPriceContainer"></div>
+
+                <div class="flex justify-end pt-6">
+                  <div
+                    class="flex justify-center items-center text-[12px] text-[#191919] tracking-wider"
+                  >
+                    <span
+                      >Or 4 payments of $25.00 by
+                      <button class="border-2 border-[#DFE0E1] rounded-sm">
+                        <img
+                          src="/src/assets/klarna.svg"
+                          class="w-[40px] h-[20px]"
+                          alt=""
+                        />
+                      </button>
+                      or
+                      <button class="border-2 border-[#DFE0E1] rounded-sm">
+                        <img
+                          src="/src/assets/paypal.svg"
+                          class="w-[40px] h-[20px]"
+                          alt=""
+                        />
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="pt-6">
+                  <div class="flex flex-col gap-3 w-full">
+                    <div>
+                      <button
+                        onclick="createOrder()"
+                        class="border border-[#191919] w-full bg-[#191919] rounded-sm py-4"
+                      >
+                        <b class="uppercase text-white text-[18px]">Checkout</b>
+                      </button>
+                    </div>
+                    <button
+                      class="border border-[#EEEEEE] rounded-sm flex justify-center"
+                    >
+                      <img
+                        src="/src/assets/paypal.svg"
+                        class="w-[80px] h-[61px]"
+                        alt=""
+                      />
+                    </button>
+                    <button
+                      class="border border-[#EEEEEE] rounded-sm flex justify-center"
+                    >
+                      <img
+                        src="/src/assets/applepay.svg"
+                        class="w-[80px] h-[61px]"
+                        alt=""
+                      />
+                    </button>
+                  </div>
+                  <div class="pt-2 leading-4">
+                    <span class="text-[12px]"
+                      >By continuing, I confirm that I have read and accept the
+                      <a href="" class="border-b-2 border-[#CCCCCC]"
+                        >Terms and Conditions.</a
+                      >
+                      and the
+                      <a href="" class="border-b-2 border-[#CCCCCC]"
+                        >Privacy Policy.</a
+                      >
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="slidershopping" class="flex flex-col pt-4">
+          <div>
+            <h4 class="text-[18px] zl:text-[24px]"><b>YOU MAY ALSO LIKE</b></h4>
+          </div>
+          <div>
+            <div class="swiper mySwiper">
+              <div id="swiper-slideshopping" class="swiper-wrapper mb-4"></div>
+              <div class="swiper-scrollbar !static"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-[#FAFAFA] pb-8">
+        <div class="wrapper max-w-[1150px] mx-auto">
+          <div
+            class="flex gap-4 bl:gap-0 bl:flex-wrap bl:justify-normal px-6 lg:gap-6 lg:flex-nowrap justify-center py-3 zl:py-5 sl:py-12"
+          >
+            <div class="w-6/12 bl:w-4/12 bl:pr-1 sl:pr-3">
+              <div
+                class="flex flex-col h-full w-full justify-center items-center border border-[#E5E7EB] rounded-xl py-12 gap-2"
+              >
+                <div>
+                  <img src="/src/assets/lock.svg" alt="" />
+                </div>
+                <h3 class="text-[18px] uppercase text-center">
+                  <b
+                    >secure <br class="flex sm:hidden" />
+                    payments</b
+                  >
+                </h3>
+                <span class="text-center uppercase text-[12px] px-1"
+                  >ssl encryption on all transactions</span
+                >
+              </div>
+            </div>
+            <div class="w-6/12 bl:w-4/12 bl:px-2 sl:px-3">
+              <div
+                class="flex flex-col h-full w-full justify-center items-center border border-[#E5E7EB] rounded-xl py-8 gap-2"
+              >
+                <div>
+                  <img src="/src/assets/truck.svg" alt="" />
+                </div>
+                <h3 class="text-[18px] uppercase text-center">
+                  <b
+                    >free & fast<br class="flex sm:hidden" />
+                    returns</b
+                  >
+                </h3>
+                <span class="text-center uppercase text-[12px] px-3"
+                  >free return on all qualifying orders</span
+                >
+              </div>
+            </div>
+            <div class="hidden bl:flex bl:w-4/12 bl:pl-1 sl:pl-3">
+              <div
+                class="flex flex-col h-full w-full justify-center items-center border border-[#E5E7EB] rounded-xl py-8 gap-2"
+              >
+                <div>
+                  <img src="/src/assets/message.svg" alt="" />
+                </div>
+                <h3 class="text-[18px] uppercase text-center">
+                  <b>Active Support</b>
+                </h3>
+                <span class="text-center uppercase text-[12px] px-3"
+                  >Get in touch if you have a problem</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center items-center pt-3">
+            <div>
+              <span class="uppercase">Our trusted payment partners</span>
+            </div>
+            <div class="py-6">
+              <ul
+                class="flex flex-wrap items-center justify-center gap-6 lg:gap-8"
+              >
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/visa.svg"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                </li>
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/master-card.svg"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                </li>
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/american-express.svg"
+                    class="w-full h-full"
+                    alt=""
+                  />
+                </li>
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/bitcoin.svg"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                </li>
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/paypal.svg"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                </li>
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/afterpay.svg"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                </li>
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/klarna.svg"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                </li>
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/applepay.svg"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                </li>
+                <li class="w-[72px] h-[48px]">
+                  <img
+                    src="/src/assets/tether.svg"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-[#181818]"></footer>
+    <script type="module" src="/src/js/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="services/api.js"></script>
+    <script type="module" src="/src/js/shopping.js"></script>
+  </body>
+</html>

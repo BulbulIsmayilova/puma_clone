@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.wrapper {
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.wrapper1 {
+  padding: 15px 20px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 1000px) {
+  .wrapper {
+    padding: 20px 40px;
+    width: 100%;
+  }
+
+  .wrapper1 {
+    padding: 20px 30px !important;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1350px){
+  .wrapper1 {
+    padding: 20px 100px !important;
+    width: 100%;
+  }
+}
+
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./font/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: "RobotoBold";
+  src: url("./font/Roboto-Bold.ttf");
+}
+
+@font-face {
+  font-family: "RobotoLight";
+  src: url("font/Roboto-Light.ttf");
+}
+
+#InfoSection,
+#boyone,
+#boytwo,
+#holidaySection,
+#GirlSection,
+#qrSection {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+@media only screen and (min-width: 540px) {
+  #heroSection {
+    background-image: url("../src/assets/HeroSectionbgdes2.avif");
+  }
+
+  #secondSection {
+    background-image: url("../src/assets/SecondSection2.avif");
+  }
+
+  #heroSection {
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: cover;
+  }
+
+  #secondSection {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #heroSection {
+    background-image: url("../src/assets/HeroSectionbgdes3.avif");
+  }
+
+  #secondSection {
+    background-image: url("../src/assets/SecondSection.avif");
+  }
+}
+
+b {
+  font-family: "RobotoBold" !important;
+}
+
+.accordion-content , .cart-accordion {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  max-height: 0;
+  margin-top:0;
+}
+
+.active-size{
+  background-color: black !important;
+  color: white !important;
+}
+
+.accordion-icon{
+  transition: rotate .2s;
+}
+
+.accordion-icon-active{
+  rotate: 180deg;
+}
+
+.accordion-active {
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-height: 280px !important;
+  margin: 20px 0 !important;
+}
+
+.accordion-card{
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: 20px;
+}
+
+.filteraccordion-active {
+  visibility: visible;
+  opacity: 1;
+  margin: 20px 0;
+  max-height: 600px;
+}
+
+* {
+  font-family: "Roboto" !important;
+}
+
+i{
+  font-family: "Font Awesome 6 Free" !important;
+}
+
+a,
+span {
+  font-family: "RobotoLight" !important;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.side-act {
+  z-index: 999 !important;
+  opacity: 1 !important;
+  visibility: visible;
+}
+
+.secondside-act {
+  z-index: 999 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateX(0) !important;
+  right: 0 !important;
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0;
+  transform: translateX(300%);
+  background: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s ease-in-out; /* Sağdan sola geçiş */
+}

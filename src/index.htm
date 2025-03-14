@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  </head>
+  <body>
+
+    <div
+      id="signinContainer"
+      class="fixed -z-[10] top-20 right-4 w-full opacity-0 duration-150 max-w-[320px] max-h-[400px] rounded-sm"
+    ></div>
+
+    <div
+      id="searchContainer"
+      class="fixed -z-1 invisible inset-0 opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="lgContainer"
+      class="fixed top-[88px] left-0 bottom-0 right-0 z-[-1] opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="sideContainer"
+      class="fixed -z-1 invisible inset-0 duration-300 opacity-0"
+    ></div>
+
+    <header class="sticky top-0 right-0 left-0 z-[900]"></header>
+    
+    <main>
+      <section id="heroSection">
+        <div class="sm:hidden">
+          <img src="/src/assets/HeroSectionbgmob.avif" alt="" />
+        </div>
+        <div
+          class="flex flex-col sm:py-[10%] bl:py-[12%] md:py-[13%] lg:py-[15%] justify-center sm:items-end sm:ml-auto items-center p-6 max-w-[290px] sm:max-w-[330px] md:max-w-[400px] lg:max-w-[500px] sm:mx-0 mx-auto"
+        >
+          <h1
+            class="text-[24px] leading-5 sm:text-[28px] sm:leading-5 sm:text-white md:text-[32px] md:leading-5 lg:text-[40px]"
+          >
+            <b>PUMA x SQUID GAME</b>
+          </h1>
+          <p
+            class="mt-2 text-[14px] text-[#272727] sm:text-white sm:text-[18px] sm:leading-6 md:text-[20px] lg:text-[24px] lg:pt-3"
+          >
+            <a href="">ENTER THE GAME </a>
+          </p>
+          <button
+            class="border border-[#181818] bg-[#181818] text-white w-full mt-6 py-[8px] px-[20px] sm:border sm:border-white sm:bg-white sm:text-[#181818] sm:max-w-[240px] sm:w-ful lg:max-w-[220px]"
+          >
+            <b>SHOP THE COLLECTION</b>
+          </button>
+        </div>
+      </section>
+
+      <section id="SliderSection" class="py-6">
+        <div class="wrapper">
+          <div class="mb-6">
+            <h2
+              class="text-[18px] tracking-wider zl:text-[24px] zl:tracking-normal"
+            >
+              <b>EXPLORE THE COLLECTION</b>
+            </h2>
+          </div>
+          <div>
+            <div class="swiper mySwiper">
+              <div id="swiper-slide" class="swiper-wrapper mb-4"></div>
+              <div class="swiper-scrollbar !static"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="secondSection">
+        <div class="sm:hidden">
+          <img src="/src/assets/SecondSectionimgmb.avif" alt="" />
+        </div>
+        <div
+          class="flex flex-col justify-center sl:ml-4 lg:ml-10 bl:py-[5%] md:py-[8%] lg:py-[10%] items-center sm:max-w-[328px] sm:items-start p-6 max-w-[290px] md:max-w-[450px] sl:max-w-[416px] lg:max-w-[448px] sm:mx-0 mx-auto"
+        >
+          <h1
+            class="text-[24px] sl:text-[32px] sl:leading-4 leading-5 tracking-wide sm:text-[28px] sm:leading-5 sm:text-white lg:text-[40px] lg:leading-4"
+          >
+            <b>MB.04 HEEM</b>
+          </h1>
+          <p
+            class="mt-2 text-[14px] text-[#272727] sl:text-[20px] sl:leading-6 sl:mt-4 sm:text-white sm:text-[18px] sm:leading-6 lg:text-[24px] lg:leading-5 lg:pt-4"
+          >
+            <a href="">BY LAMELO BALL </a>
+          </p>
+          <p
+            class="mt-2 text-[12px] text-center text-[#272727] sl:text-[16px] sl:leading-6 sm:text-white sm:text-start sm:text-[14px] sm:leading-6 lg:text-[16px] lg:leading-6"
+          >
+            <a href=""
+              >Melo is HEEM. LaMelo Ball’s signature shoe,<br />
+              the MB.04, gets a neon redesign <br />
+              inspired by the energy he brings on the court.
+            </a>
+          </p>
+          <button
+            class="border border-[#181818] bg-[#181818] text-white mt-6 py-[8px] px-[20px] sm:border sm:border-white sm:bg-white sm:text-[#181818] sm:max-w-[240px] sm:w-ful lg:max-w-[220px]"
+          >
+            <b>SHOP NOW</b>
+          </button>
+        </div>
+      </section>
+
+      <section id="SliderSectionSecond" class="py-6">
+        <div class="wrapper">
+          <div class="mb-6">
+            <h2
+              class="text-[18px] tracking-wider zl:text-[24px] zl:tracking-normal"
+            >
+              <b>EXPLORE MORE FROM LAMELO BALL</b>
+            </h2>
+          </div>
+          <div>
+            <div class="swiper mySwiper">
+              <div id="swiper-slidesec" class="swiper-wrapper mb-4"></div>
+              <div class="swiper-scrollbar !static"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="InfoSection"
+        class="flex flex-col justify-center items-center h-full w-full text-white text-center"
+      >
+        <div
+          class="sm:w-[500px] sm:h-[202px] sm:px-6 sm:py-10 my-2 sl:w-[584px] sl:h-[260px] lg:w-[720px] lg:flex lg:items-center lg:flex-col lg:justify-center lg:h-[302px]"
+        >
+          <div>
+            <h4
+              class="text-[24px] sm:text-[26px] sm:mb-4 sl:text-[32px] lg:text-[40px]"
+            >
+              <b>50% OFF SELECT STYLES</b>
+            </h4>
+            <span
+              class="text-[14px] mt-2 sm:text-[18px] sl:text-[21px] lg:text-[24px]"
+            >
+              <a href="">CATCH THESE HUGE SAVINGS BEFORE THEY’RE GONE</a></span
+            >
+            <br class="hidden lg:block" />
+
+            <span
+              class="text-[12px] sm:text-[14px] sl:text-[16px] sl:pt-4 block lg:text-[16px]"
+            >
+              <a href="">NO CODE NEEDED. EXCLUSIONS APPLY.</a>
+            </span>
+          </div>
+          <div>
+            <button
+              class="border border-[#e5e7ebd9] text-black bg-white uppercase py-[8px] px-[20px] sl:py-[10px] sl:px-[22px] mt-6"
+            >
+              <b>Shop now</b>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="boySection" class="py-2">
+        <div class="wrapper">
+          <div class="flex gap-2 sm:gap-4">
+            <div class="w-6/12">
+              <div
+                id="boyone"
+                class="flex relative items-end p-2 sm:p-4 lg:p-6"
+              >
+                <div
+                  style="
+                    background: linear-gradient(
+                      0deg,
+                      rgba(0, 0, 0, 0.45) 0%,
+                      rgba(0, 0, 0, 0) 60%
+                    );
+                  "
+                  class="absolute inset-0"
+                ></div>
+                <b
+                  class="text-[16px] relative z-10 text-white sm:text-[20px] tracking-tight bl:text-[26px] lg:text-[40px]"
+                  >FLEECE FROM $19.99</b
+                >
+              </div>
+            </div>
+            <div class="w-6/12">
+              <div
+                id="boytwo"
+                class="flex items-end p-2 relative sm:p-4 lg:p-6"
+              >
+                <div
+                  style="
+                    background: linear-gradient(
+                      0deg,
+                      rgba(0, 0, 0, 0.45) 0%,
+                      rgba(0, 0, 0, 0) 60%
+                    );
+                  "
+                  class="absolute inset-0"
+                ></div>
+                <b
+                  class="text-[16px] text-white tracking-tight z-10 sm:text-[20px] bl:text-[26px] lg:text-[40px]"
+                  >2 FOR $20 TEES</b
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="holidaySection" class="py-4">
+        <div class="sm:hidden">
+          <img src="/src/assets/HolodayMob.avif" alt="" />
+        </div>
+        <div class="wrapper">
+          <div
+            class="flex flex-col justify-center items-center py-2 sm:items-start sm:text-white sm:py-10 bl:py-20 md:py-30 sl:py-40 lg:py-50"
+          >
+            <h4
+              class="text-[24px] sm:text-[28px] sl:text-[32px] lg:text-[40px]"
+            >
+              <b>HOLIDAY FAVORITES</b>
+            </h4>
+            <span
+              class="text-[14px] sm:text-[18px] text-center sl:text-[20px] lg:text-[24px]"
+              >WHAT’S ON EVERYONE’S LIST</span
+            >
+            <div
+              class="flex flex-wrap gap-2 justify-center items-center pt-4 hl:gap-3 text-white sm:text-black"
+            >
+              <button
+                class="border border-[#181818] bg-[#181818] sm:bg-white py-[8px] px-[20px]"
+              >
+                GIFTS FOR HIM
+              </button>
+              <button
+                class="border border-[#181818] bg-[#181818] sm:bg-white py-[8px] px-[20px]"
+              >
+                GIFTS FOR HER
+              </button>
+              <button
+                class="border border-[#181818] bg-[#181818] sm:bg-white py-[8px] px-[20px]"
+              >
+                GIFTS FOR KIDS
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="GridProduct" class="py-2">
+        <div class="wrapper">
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-4">
+              <h4 class="text-[28px] bl:text-[32px]">
+                <b>ON EVERYONE’S LIST</b>
+              </h4>
+              <span class="text-[18px]">OUR TOP GIFTS THIS YEAR</span>
+            </div>
+            <div id="GridDiv" class="flex flex-wrap text-white">
+              <div
+                class="sm:w-3/12 h-full flex mb-2 sm:mb-0 w-6/12 pr-1 sm:pr-2"
+              >
+                <div class="relative h-full overflow-hidden">
+                  <img
+                    src="/src/assets/GriDItem1.avif"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                  <p
+                    class="text-[18px] absolute z-10 bottom-2 left-2 leading-6 md:text-[24px] md:bottom-4 md:left-3 lg:text-[28px] lg:bottom-6 lg:left-4"
+                  >
+                    <b>GIFT CLASSICS</b>
+                  </p>
+                  <div
+                    style="
+                      background: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.45) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                      );
+                    "
+                    class="absolute inset-0"
+                  ></div>
+                </div>
+              </div>
+              <div
+                class="sm:w-3/12 h-full flex mb-2 sm:mb-0 w-6/12 pl-1 sm:pr-2 sm:pl-2"
+              >
+                <div class="relative h-full">
+                  <img
+                    src="/src/assets/GriDItem2.avif"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                  <p
+                    class="text-[18px] z-10 absolute bottom-2 left-2 leading-6 md:text-[24px] md:bottom-4 md:left-3 lg:text-[28px] lg:bottom-6 lg:left-4"
+                  >
+                    <b>GIFT LOUNGEWEAR</b>
+                  </p>
+                  <div
+                    style="
+                      background: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.45) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                      );
+                    "
+                    class="absolute inset-0"
+                  ></div>
+                </div>
+              </div>
+              <div class="sm:w-3/12 h-full flex w-6/12 pr-1 sm:pl-2 sm:pr-2">
+                <div class="relative h-full">
+                  <img
+                    src="/src/assets/GriDItem3.avif"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                  <div
+                    style="
+                      background: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.45) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                      );
+                    "
+                    class="absolute inset-0"
+                  ></div>
+                  <p
+                    class="text-[18px] z-10 absolute bottom-2 left-2 leading-6 md:text-[24px] md:bottom-4 md:left-3 lg:text-[28px] lg:bottom-6 lg:left-4"
+                  >
+                    <b>STOCKING STUFFERS</b>
+                  </p>
+                </div>
+              </div>
+              <div class="sm:w-3/12 h-full flex w-6/12 pl-1 sm:pl-2">
+                <div class="relative h-full">
+                  <img
+                    src="/src/assets/GriDItem4.avif"
+                    alt=""
+                    class="w-full h-full"
+                  />
+                  <div
+                    style="
+                      background: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.45) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                      );
+                    "
+                    class="absolute inset-0"
+                  ></div>
+                  <p
+                    class="text-[18px] z-10 absolute bottom-2 left-2 leading-6 md:text-[24px] md:bottom-4 md:left-3 lg:text-[28px] lg:bottom-6 lg:left-4"
+                  >
+                    <b>E-GIFT CARDS</b>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="GirlSection" class="py-4">
+        <div class="sm:hidden">
+          <img src="/src/assets/GirlSectionmb.avif" alt="" class="w-full" />
+        </div>
+        <div class="wrapper">
+          <div
+            id="speedcatinfo"
+            class="flex flex-col justify-center items-center gap-4 py-2 sm:items-start sm:text-white sm:pt-10 bl:py-10 md:py-20 lg:pt-40"
+          >
+            <div class="text-center sm:text-start">
+              <h4
+                class="text-[24px] sm:text-[28px] sl:text-[32px] lg:text-[40px]"
+              >
+                <b>SPEEDCAT</b>
+              </h4>
+              <p
+                class="text-[14px] sm:text-[18px] sl:text-[20px] lg:text-[24px]"
+              >
+                REWRITE THE CLASSICS
+              </p>
+              <span
+                class="text-[12px] sm:text-[14px] sl:text-[16px] lg:text-[16px]"
+                >WORN BY ROSÉ</span
+              >
+            </div>
+            <div>
+              <button
+                class="border border-[#181818] bg-[#181818] sm:border-white sm:bg-white sm:text-black px-[20px] py-[8px] uppercase text-white"
+              >
+                <b>Shop now</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="SliderSectionThird" class="py-6 pb-10">
+        <div class="wrapper">
+          <div class="mb-6">
+            <h2
+              class="text-[18px] tracking-wider zl:text-[24px] zl:tracking-normal"
+            >
+              <b>STYLES EVERYONE WILL LOVE</b>
+            </h2>
+          </div>
+          <div>
+            <div class="swiper mySwiper">
+              <div id="swiper-slidethird" class="swiper-wrapper mb-4"></div>
+              <div class="swiper-scrollbar !static"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="qrSection"
+        class="flex items-center justify-center sm:py-10 zl:py-16 bl:py-24 md:py-28 sl:py-32 lg:py-44"
+      >
+        <div class="wrapper">
+          <div
+            id="qrSectionInfo"
+            class="flex flex-col items-center justify-center gap-8 sm:items-start sm:justify-start"
+          >
+            <div class="text-center text-white sm:text-start sm:text-black">
+              <h4
+                class="text-[24px] sm:text-[28px] sl:text-[32px] lg:text-[40px]"
+              >
+                <b>25 DAYS OF PUMA</b>
+              </h4>
+              <p
+                class="text-[14px] sm:py-1 sm:text-[18px] sl:text-[20px] lg:text-[24px]"
+              >
+                SAVINGS, STYLE, AND A <b>SURPRISE ON DAY 25</b>
+              </p>
+              <span class="text-[12px] sm:hidden"
+                >HAPPENING NOW ON THE PUMA APP</span
+              >
+              <span
+                class="text-[12px] hidden sm:block sm:text-[14px] sl:text-[16px] lg:text-[16px]"
+                >HAPPENING NOW ON THE PUMA APP | SCAN THE QR CODE TO DOWNLOAD
+              </span>
+            </div>
+            <div class="sm:hidden">
+              <button
+                class="uppercase py-[8px] px-[20px] border border-white bg-white"
+              >
+                <b>Download now</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="GridInfo" class="py-2">
+        <div class="wrapper">
+          <div class="flex flex-col gap-2">
+            <div class="text-center pb-4">
+              <h4 class="text-[28px] bl:text-[32px]">
+                <b>SHOPPING MADE EASY</b>
+              </h4>
+              <span class="text-[18px]">FIND WHAT WORKS FOR YOU</span>
+            </div>
+            <div id="GridDiv" class="flex flex-wrap text-white">
+              <div
+                class="sm:w-3/12 h-full flex mb-2 sm:mb-0 w-6/12 pr-1 sm:pr-2"
+              >
+                <div class="relative overflow-hidden w-full h-full">
+                  <img
+                    src="/src/assets/GridItem1-2.avif"
+                    alt=""
+                    class="w-full h-full"
+                    id="img1"
+                  />
+                  <p
+                    class="text-[24px] absolute z-10 bottom-14 lg:bottom-20 lg:left-4 left-3 leading-8 sm:text-[20px] sm:leading-6 bl:text-[22px] md:text-[24px] sm:pb-1 md:leading-7 lg:text-[28px]"
+                  >
+                    <b>E-GIFT CARDS</b>
+                  </p>
+                  <span
+                    class="absolute z-10 bottom-4 left-3 lg:left-4 lg:bottom-6 text-[14px] leading-5 sm:text-[10px] bl:text-[12px] sm:leading-4 md:text-[16px] md:leading-5"
+                    >PURCHASE E-GIFT CARDS <br />
+                    FOR EASY GIFT GIVING</span
+                  >
+                  <div
+                    style="
+                      background: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.45) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                      );
+                    "
+                    class="absolute inset-0"
+                  ></div>
+                </div>
+              </div>
+
+              <div
+                class="sm:w-3/12 h-full flex mb-2 sm:mb-0 w-6/12 pr-1 sm:pr-2"
+              >
+                <div class="relative overflow-hidden w-full h-full">
+                  <img
+                    src="/src/assets/GridItem2-2.avif"
+                    alt=""
+                    class="w-full h-full"
+                    id="img2"
+                  />
+                  <p
+                    class="text-[24px] absolute z-10 bottom-14 lg:bottom-20 lg:left-4 left-3 leading-8 sm:text-[20px] sm:leading-6 bl:text-[22px] md:text-[24px] sm:pb-1 md:leading-7 lg:text-[28px]"
+                  >
+                    <b>EMAIL SIGN-UP</b>
+                  </p>
+                  <span
+                    class="absolute z-10 bottom-4 left-3 lg:left-4 lg:bottom-6 text-[14px] leading-5 sm:text-[10px] bl:text-[12px] sm:leading-4 md:text-[16px] md:leading-5"
+                    >BE IN THE KNOW FOR <br />
+                    THE LATEST PUMA NEWS
+                  </span>
+                  <div
+                    style="
+                      background: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.45) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                      );
+                    "
+                    class="absolute inset-0"
+                  ></div>
+                </div>
+              </div>
+
+              <div
+                class="sm:w-3/12 h-full flex mb-2 sm:mb-0 w-6/12 pr-1 sm:pr-2"
+              >
+                <div class="relative overflow-hidden w-full h-full">
+                  <img
+                    src="/src/assets/GridItem3-2.avif"
+                    alt=""
+                    class="w-full h-full"
+                    id="img3"
+                  />
+                  <p
+                    class="text-[24px] absolute z-10 bottom-[100px] sm:bottom-[70px] bl:bottom-[80px] md:bottom-[100px] lg:left-4 left-3 leading-6 sm:text-[15px] sm:leading-6 bl:text-[22px] md:text-[24px] sm:pb-1 md:leading-7 lg:text-[28px]"
+                  >
+                    <b>DOWNLOAD PUMA APP</b>
+                  </p>
+                  <span
+                    class="absolute z-10 bottom-4 left-3 lg:left-4 lg:bottom-6 text-[14px] leading-5 sm:text-[8px] bl:text-[12px] sm:leading-4 md:text-[16px] md:leading-5"
+                    >DISCOVER APP EXCLUSIVES, SHOP OUR NEWEST COLLECTIONS AND
+                    VIEW OUR LAUNCH CALENDAR
+                  </span>
+                  <div
+                    style="
+                      background: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.45) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                      );
+                    "
+                    class="absolute inset-0"
+                  ></div>
+                </div>
+              </div>
+
+              <div
+                class="sm:w-3/12 h-full flex mb-2 sm:mb-0 w-6/12 pr-1 sm:pr-2"
+              >
+                <div class="relative overflow-hidden w-full h-full">
+                  <img
+                    src="/src/assets/GridItem4-2.avif"
+                    alt=""
+                    class="w-full h-full"
+                    id="img4"
+                  />
+                  <p
+                    class="text-[24px] absolute z-10 bottom-14 md:bottom-[80px] sl:bottom-[70px] lg:bottom-20 lg:left-4 left-3 leading-8 sm:text-[20px] sm:leading-6 bl:text-[22px] md:text-[24px] sm:pb-1 md:leading-6 lg:text-[28px]"
+                  >
+                    <b>BUY NOW, PAY LATER</b>
+                  </p>
+                  <span
+                    class="absolute z-10 bottom-4 left-3 lg:left-4 lg:bottom-6 text-[14px] leading-5 sm:text-[10px] bl:text-[12px] sm:leading-4 md:text-[16px] md:leading-5"
+                    >JUST LIKE IT SAYS. SHOP <br />
+                    USING PAYPAL OR AFTERPAY
+                  </span>
+                  <div
+                    style="
+                      background: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.45) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                      );
+                    "
+                    class="absolute inset-0"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[#181818]"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="js/layout.js"></script>
+    <script type="module" src="services/api.js"></script>
+    <script type="module" src="js/index.js"></script>
+  </body>
+</html>

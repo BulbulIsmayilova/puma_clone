@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+      .custom-select {
+        appearance: none; /* Webkit için */
+        -webkit-appearance: none; /* Safari/Chrome için */
+        -moz-appearance: none; /* Firefox için */
+        border: 1px solid #3b4047;
+        border-radius: 2px;
+        padding-right: 4.5rem; /* Sağdaki özel ok için boşluk */
+        padding-left: 0.8rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        position: relative;
+        background-size: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <div
+      id="searchContainer"
+      class="fixed -z-1 invisible inset-0 opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="signinContainer"
+      class="fixed -z-[10] top-20 right-4 w-full opacity-0 duration-150 max-w-[320px] max-h-[400px] rounded-sm"
+    ></div>
+
+    <div
+      id="lgContainer"
+      class="fixed top-[88px] left-0 bottom-0 right-0 z-[-1] opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="sideContainer"
+      class="fixed -z-1 invisible inset-0 duration-300 opacity-0"
+    ></div>
+    <!-- Header -->
+
+    <header class="sticky top-0 right-0 left-0 z-[900]"></header>
+    <main class="pb-12">
+      <div class="min-h-[50vh]">
+        <div class="wrapper">
+          
+          <div class="flex sl:hidden">
+            <a href=""
+              ><div class="flex gap-1 justify-start items-center">
+                <div>
+                  <img src="/src/assets/rightdetail.svg" alt="" />
+                </div>
+                <div>
+                  <b>Shoes</b>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="hidden sl:flex">
+            <div class="pt-2">
+              <ul class="flex justify-center items-center gap-8">
+                <li>
+                  <a href=""><b class="text-[#191919]">Home</b></a>
+                </li>
+                <li class="list-disc text-[#8C9198] tracking-wider">
+                  <a href=""><b class="text-[#191919] px-2">Sale</b></a>
+                </li>
+                <li class="list-disc text-[#8C9198] tracking-wider">
+                  <a href=""><b class="text-[#191919] px-2">Women's Sale</b></a>
+                </li>
+                <li class="list-disc text-[#8C9198] tracking-wider">
+                  <a href=""><b class="text-[#191919] px-2">Shoes</b></a>
+                </li>
+                <li class="list-disc text-[#8C9198] tracking-wider">
+                  <a href="" class="text-[#191919] px-2"
+                    >Pacer Future Street Women's Sneakers</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-3 sm:pt-5 flex bl:hidden">
+            <div class="swiper mySwiper">
+              <div id="swiper-slidedetail" class="swiper-wrapper mb-4"></div>
+              <div class="swiper-scrollbar !static"></div>
+            </div>
+          </div>
+
+          <div id="InfoSection" class="bl:flex bl:gap-6 bl:items-start bl:relative bl:pt-5">
+            <div class="hidden bl:flex bl:w-6/12 sl:w-8/12">
+              <div class="grid grid-cols-2 gap-4 griddetail"></div>
+            </div>
+
+            <div class="pt-4 bl:w-6/12 sl:w-4/12 bl:sticky bl:top-0">
+              <div class="flex flex-col gap-4">
+                <div>
+                  <h1 id="title_product" class="text-[24px] tracking-wide">
+                    
+                  </h1>
+                  <h2 class="text-[18px] text-[#676D75]">
+                    <span>Women's Sneakers</span>
+                  </h2>
+                </div>
+                <div class="flex flex-col gap-2 md:flex-row md:gap-6">
+                  <div id="pricecontainer" class="flex gap-4 md:items-center">
+                   
+                  </div>
+                  <div class="flex flex-col text-[12px] text-[#191919]">
+                    <span class="flex items-center gap-1"
+                      >Or 4 payments of $25.00 by
+                      <button class="border-2 border-[#DFE0E1] rounded-sm">
+                        <img
+                          src="/src/assets/klarna.svg"
+                          class="w-[40px] h-[20px]"
+                          alt=""
+                        />
+                      </button>
+                      or
+                      <button class="border-2 border-[#DFE0E1] rounded-sm">
+                        <img
+                          src="/src/assets/paypal.svg"
+                          class="w-[40px] h-[20px]"
+                          alt=""
+                        />
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-6 pt-2 bl:pt-6">
+                <div class="flex flex-col gap-2">
+                  <h3 class="text-[20px]"><b>Color</b></h3>
+                  <h4 id="colorInfo" class="text-[14px] text-[#1E1E1E]">
+                   
+                  </h4>
+                </div>
+                <div id="ColorPictureContainer" class="flex gap-2 border-b pb-6 border-[#DFE0E1]">
+              
+                </div>
+              </div>
+
+
+              <div class="pt-2 border-b pb-6 border-[#DFE0E1]">
+                <div class="py-2">
+                  <h4 class="text-[20px]"><b>Size</b></h4>
+                </div>
+                <div id="sizeDetail" class="flex flex-wrap gap-1 pt-2"></div>
+              </div>
+
+              <div class="pt-6">
+                <div class="flex gap-2">
+                  <div class="flex items-start w-full">
+                    <div class="inline relative">
+                      <select name="" id="countValue" class="custom-select relative">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                      <div
+                        class="down absolute top-[50%] right-3 -translate-y-[50%]"
+                      >
+                        <img src="/src/assets/downabsolute.svg" alt="" />
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col pl-3 gap-2 w-full">
+                      <button onclick="goBasket()"
+                        class="border border-[#191919] bg-[#191919] py-4 rounded-sm text-white uppercase w-full"
+                      >
+                        <b>Add to cart</b>
+                      </button>
+                      <button onclick="goWhislist()"
+                        class="border border-[#191919] uppercase w-full py-4 rounded-sm flex justify-center gap-4"
+                      >
+                        <span><img src="assets/heartdetail.svg" alt="" /></span>
+                        <b>Add to Wishlist</b>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-3 pt-10">
+                <div>
+                  <img src="/src/assets/loop.svg" alt="" />
+                </div>
+                <div>
+                  <p class="text-[#676D75]">
+                    <b>Free returns on all qualifying orders.</b>
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-3 pt-8">
+                <h2 class="text-[20px] tracking-wide"><b>Description</b></h2>
+                <div class="w-full text-[#1A1A1A]">
+                  <span class="w-full">
+                    <span id="DescriptionInfo"> </span>
+                   
+                    <ul class="pl-4 pt-4">
+                      <li class="list-disc text-[#191919]">
+                        <span>Style: 387068_26</span>
+                      </li>
+                      <li class="list-disc text-[#191919]">
+                        <span>Color: Green Moon-Alpine Snow</span>
+                      </li>
+                    </ul>
+                  </span>
+                </div>
+              </div>
+              <button id="scrollButton"
+                class="uppercase border-b-2 pt-6 text-[14px] leading-4 border-[#191919]"
+              >
+                <b>read more</b>
+              </button>
+              <div class="flex flex-col gap-3 pt-10">
+                <h2 class="text-[20px] tracking-wide">
+                  <b>Shipping and Returns</b>
+                </h2>
+                <p class="text-[#1A1A1A]">
+                  <span
+                    >Free standard shipping on orders over $60 before tax, plus
+                    free returns on all qualifying orders.</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div id="sliderdetail" class="flex flex-col pt-10">
+              <div>
+                <h4 class="text-[18px] zl:text-[24px]">
+                  <b>YOU MAY ALSO LIKE</b>
+                </h4>
+              </div>
+              <div>
+                <div class="swiper mySwiper1">
+                  <div
+                    id="swiper-slidedetail1"
+                    class="swiper-wrapper mb-6"
+                  ></div>
+                  <div class="swiper-scrollbar !static"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex flex-col pt-10">
+              <div>
+                <h4 class="text-[18px] zl:text-[24px]">
+                  <b>FREQUENTLY BOUGHT TOGETHER</b>
+                </h4>
+              </div>
+              <div>
+                <div class="swiper mySwiper1">
+                  <div
+                    id="swiper-slidedetail2"
+                    class="swiper-wrapper mb-6"
+                  ></div>
+                  <div class="swiper-scrollbar !static"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section id="targetsection" class="bg-[#F3F3F3] mt-14 px-6 pt-8 pb-10 ">
+            <div class="flex flex-col gap-4">
+              <h3 class="text-[20px]"><b>PRODUCT STORY</b></h3>
+              <p>
+                <span
+                  >Stride in style with our Pacer sneakers, a sleek silhouette
+                  that keeps you a step ahead of the fashion pack. Our Pacer
+                  Future Streets deliver on style and substance with sleek,
+                  trend-relevant lines and the unrivaled performance of our
+                  CMEVA midsole and SoftFoam+ sockliner for easy step in and
+                  all-day comfort.</span
+                >
+              </p>
+            </div>
+            <div class="bl:flex bl:gap-14">
+              <div class="bl:w-6/12 bl:flex bl:flex-col bl:gap-20 ">
+                <div class="flex flex-col gap-4 pt-8">
+                  <h3 class="text-[20px]"><b> FEATURES & BENEFITS </b></h3>
+                  <ul class="pl-4">
+                    <li class="list-disc text-[#8A7351]">
+                      <span class="text-black">
+                        CMEVA: PUMA's compression-moulded EVA material for
+                        lightweight performance</span
+                      >
+                    </li>
+                    <li class="list-disc text-[#8A7351] pt-2">
+                      <span class="text-black">
+                        SoftFoam+: PUMA's comfort sockliner for instant step-in
+                        and long-lasting comfort that provides soft cushioning
+                        every step of your day</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="flex flex-col gap-4 pt-8">
+                  <h3 class="text-[20px]"><b>DETAILS</b></h3>
+                  <ul id="DetailInfo"  class="pl-4">
+                   
+                  </ul>
+                </div>
+              </div>
+              <div class="w-6/12">
+                <div class="flex flex-col gap-4 pt-8">
+                  <h3 class="text-[20px]"><b>Material information</b></h3>
+                  <ul class="pl-4">
+                    <li class="list-disc text-[#8A7351]">
+                      <span class="text-black">Midsole: 100% Synthetic</span>
+                    </li>
+                    <li class="list-disc text-[#8A7351] pt-2">
+                      <span class="text-black">Sockliner: 100% Textile</span>
+                    </li>
+                    <li class="list-disc text-[#8A7351] pt-2">
+                      <span class="text-black">Outsole: 100% Rubber</span>
+                    </li>
+                    <li class="list-disc text-[#8A7351] pt-2">
+                      <span class="text-black"
+                        >Upper: 57.90% Textile, 42.10% Synthetic</span
+                      >
+                    </li>
+                    <li class="list-disc text-[#8A7351] pt-2">
+                      <span class="text-black">Lining: 100% Textile</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-[#181818]"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="/src/js/layout.js"></script>
+    <script type="module" src="services/api.js"></script>
+    <script type="module" src="/src/js/detail.js"></script>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+      .custom-select {
+        appearance: none; /* Webkit için */
+        -webkit-appearance: none; /* Safari/Chrome için */
+        -moz-appearance: none; /* Firefox için */
+        border: 1px solid #3b4047;
+        border-radius: 2px;
+        padding-right: 4.5rem; /* Sağdaki özel ok için boşluk */
+        padding-left: 0.8rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        position: relative;
+        background-size: 16px;
+      }
+    </style>
+    <style>
+      button:hover span {
+        transform: scaleX(1);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <div
+      id="searchContainer"
+      class="fixed -z-1 invisible inset-0 opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="signinContainer"
+      class="fixed -z-[10] top-20 right-4 w-full opacity-0 duration-150 max-w-[320px] max-h-[400px] rounded-sm"
+    ></div>
+
+    <div
+      id="lgContainer"
+      class="fixed top-[88px] left-0 bottom-0 right-0 z-[-1] opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="sideContainer"
+      class="fixed -z-1 invisible inset-0 duration-300 opacity-0"
+    ></div>
+    <!-- Header -->
+
+    <header class="sticky top-0 right-0 left-0 z-[900]"></header>
+    <main>
+      <div class="min-h-[50vh]">
+        <div class="sl:flex ">
+          <div class="wrapper sl:order-1 sl:w-7/12">
+            <div class="flex flex-col">
+              <div>
+                <h1 class="text-[24px] sl:text-[40px] sl:tracking-wide"><b>Hello, Bulbul</b></h1>
+                <h2 class=" hidden sl:block text-[18px] tracking-wide"><span>Account Overview</span></h2>
+              </div>
+              <div class="hidden sl:flex">
+                <div>
+                    <img src="" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-[#F6F7F8] sl:w-5/12">
+            <div class="wrapper">
+              <div class="flex flex-col gap-10 bl:px-40 sl:px-0">
+                <div>
+                  <div>
+                    <button class="flex gap-4 items-center py-3">
+                      <div><img src="/src/assets/userblack.svg" alt="" /></div>
+                      <div>
+                        <p class="text-[16px]"><b>Account Overview</b></p>
+                      </div>
+                    </button>
+                  </div>
+                  <div class="pt-3">
+                    <button class="flex gap-4 items-center py-3">
+                      <div><img src="/src/assets/box.svg" alt="" /></div>
+                      <div>
+                        <p class="text-[16px]"><b>My Orders</b></p>
+                      </div>
+                    </button>
+                  </div>
+                  <div class="pt-3">
+                    <button class="flex gap-4 items-center py-3">
+                      <div><img src="/src/assets/heartblack.svg" alt="" /></div>
+                      <div>
+                        <p class="text-[16px]"><b>Wishlist</b></p>
+                      </div>
+                    </button>
+                  </div>
+                  <div class="pt-3">
+                    <button class="flex gap-4 items-center py-3">
+                      <div><img src="/src/assets/accountset.svg" alt="" /></div>
+                      <div>
+                        <p class="text-[16px]"><b>Account Settings</b></p>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <h4 class="text-[18px]"><b>Need Help?</b></h4>
+                  </div>
+                  <div class="pt-4">
+                    <ul>
+                      <li class="text-[16px] text-[#676D75]">
+                        <a href=""></a>Shipping and Delivery
+                      </li>
+                      <li class="text-[16px] text-[#676D75] pt-2">
+                        <a href=""></a>Return Policy
+                      </li>
+                      <li class="text-[16px] text-[#676D75] pt-2">
+                        <a href=""></a>Contact Us
+                      </li>
+                      <li class="text-[16px] text-[#676D75] pt-2">
+                        <a href=""></a>Privacy Policy
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="pb-8">
+                  <button onclick="logout()"
+                    class="uppercase text-[14px] border-b-2 leading-4 border-[#191919] hover:border-transparent hover:border-[#191919] transition duration-300 translate-y-2"
+                  >
+                    <b>Logout</b>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-[#181818]"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="/src/js/layout.js"></script>
+    <script type="module" src="services/api.js"></script>
+    <script type="module" src="/src/js/account.js"></script>
+  </body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      .custom-select {
+        appearance: none; /* Webkit için */
+        -webkit-appearance: none; /* Safari/Chrome için */
+        -moz-appearance: none; /* Firefox için */
+        border: 1px solid #3b4047;
+        border-radius: 2px;
+        padding-right: 4.5rem; /* Sağdaki özel ok için boşluk */
+        padding-left: 0.8rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        position: relative;
+        background-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="SizeContainer"
+      class="fixed -z-[10] bg-[#00000080] inset-0 flex items-center justify-center py-5 bl:py-2 md:py-0 px-4 opacity-0 visible duration-300"
+    ></div>
+
+    <div
+      id="deleteContainer"
+      class="fixed -z-[10] bg-[#00000080] inset-0 py-[140px] hl:py-40 rounded-md px-4 visible opacity-0"
+    ></div>
+
+    <header id="checkoutHeader" class="bg-[#181818]">
+      <div class="wrapper1">
+        <div class="flex justify-between items-center">
+          <div>
+            <a href="/src/index.htm">
+              <img src="/src/assets/logocheckout.svg" alt="" />
+            </a>
+          </div>
+
+          <div>
+            <img src="/src/assets/call.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="min-h-[80vh]">
+      <div class="wrapper1">
+        <div class="ch:max-w-[640px] sl:max-w-none ch:mx-auto">
+          <div class="flex flex-col gap-4">
+            <div class="pt-2 md:pt-4">
+              <h1 class="uppercase text-[24px] sm:text-[28px] lg:text-[32px]">
+                <b>Checkout</b>
+              </h1>
+            </div>
+            <div class="flex justify-start items-center gap-3">
+              <div class="border-b-2 border-[#191919] pb-1">
+                <a href="" class="text-[16px] uppercase text-[#191919]"
+                  ><b>Cart</b></a
+                >
+              </div>
+              <div class="border-b-2 border-[#191919] pb-1">
+                <a href="" class="text-[16px] uppercase text-[#191919]"
+                  ><b>Shipping</b></a
+                >
+              </div>
+              <div class="border-b-2 border-[#E5E7EB] pb-1">
+                <a href="" class="text-[#999999] uppercase text-[16px]"
+                  ><b>Payment</b></a
+                >
+              </div>
+              <div class="border-b-2 border-[#E5E7EB] pb-1">
+                <a href="" class="text-[#999999] uppercase text-[16px]"
+                  ><b>Summary</b></a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sl:flex-row sl:gap-6">
+            <div class="sl:w-5/12">
+              <div class="pt-8">
+                <div class="bg-[#EEEEEE]">
+                  <button
+                    onclick="toggleAccordionCard()"
+                    class="flex justify-between items-center w-full p-5 sl:py-3"
+                  >
+                    <div>
+                      <span class="uppercase text-[16px] zl:text-[20px]"
+                        >Order details (1)</span
+                      >
+                    </div>
+                    <div>
+                      <img
+                        src="/src/assets/downabsolute.svg"
+                        class="w-[20px] h-[20px] cart-icon2"
+                        alt=""
+                      />
+                    </div>
+                  </button>
+                </div>
+
+                <div
+                  class="bg-[#EEEEEE] border border-[#E5E7EB] accordion-card"
+                >
+                  <div>
+                    <p class="py-1">
+                      <b class="text-[14px] text-[#008625] uppercase px-4"
+                        >Estimated arrival: Jan 16</b
+                      >
+                    </p>
+                  </div>
+
+                  <div
+                    id="contain"
+                    class="flex flex-col gap-4 bg-white"
+                  >
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1 sm:gap-2">
+                <div>
+                  <div>
+                    <div class="bg-[#EEEEEE] mt-5">
+                      <button
+                        onclick="toggleCartAccordion()"
+                        class="flex justify-between items-center p-5 sl:p-4 w-full"
+                      >
+                        <div class="w-full">
+                          <span class="uppercase text-[16px] zl:text-[20px]"
+                            >Apply a promo code</span
+                          >
+                        </div>
+                        <div>
+                          <img
+                            src="/src/assets/downabsolute.svg"
+                            class="w-[20px] h-[20px] cart-icon"
+                            alt=""
+                          />
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex gap-2 justify-between cart-accordion">
+                      <div class="h-[56px] w-full">
+                        <input
+                          type="text"
+                          placeholder="Enter a promo code"
+                          class="border border-[#3B4047] rounded-sm h-full w-full px-4"
+                        />
+                      </div>
+                      <button
+                        class="max-w-[127px] w-full h-[56px] border border-[#BDC1C5] bg-[#BDC1C5] rounded-sm uppercase"
+                      >
+                        <b class="text-[#3B4047]">Apply</b>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    class="border-y border-[#CCCCCC] mt-6 pt-1 pb-4 leading-6"
+                  >
+                    <div
+                      class="border-b border-[#CCCCCC] py-3 rounded-sm flex items-center gap-2"
+                    >
+                      <img src="/src/assets/circleright.svg" alt="" />
+                      <p
+                        class="text-[#6C6C6C] uppercase text-[14px] tracking-wider"
+                      >
+                        <b>Free returns on all qualifying orders.</b>
+                      </p>
+                    </div>
+                    <div class="pt-4">
+                      <div
+                        class="flex justify-between items-center text-[#6C6C6C] uppercase text-[14px]"
+                      >
+                        <h4><b>Subtotal</b></h4>
+                        <p><b>$100.00</b></p>
+                      </div>
+                      <div
+                        class="flex justify-between items-center text-[#6C6C6C] uppercase text-[14px]"
+                      >
+                        <h4><b>Shipping costs</b></h4>
+                        <p><b>FREE</b></p>
+                      </div>
+                      <div
+                        class="flex justify-between items-center text-[#6C6C6C] uppercase text-[14px]"
+                      >
+                        <h4><b>Estimated sales tax</b></h4>
+                        <p><b>_</b></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-6">
+                    <div class="flex justify-between text-[20px]">
+                      <h4 class="uppercase"><b>Estimated total</b></h4>
+                      <p><b>$100.00</b></p>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-end pt-4">
+                    <div
+                      class="flex justify-center items-center text-[12px] text-[#191919] tracking-wider"
+                    >
+                      <span
+                        >Or 4 payments of $25.00 by
+                        <button class="border-2 border-[#DFE0E1] rounded-sm">
+                          <img
+                            src="/src/assets/klarna.svg"
+                            class="w-[40px] h-[20px]"
+                            alt=""
+                          />
+                        </button>
+                        or
+                        <button class="border-2 border-[#DFE0E1] rounded-sm">
+                          <img
+                            src="/src/assets/paypal.svg"
+                            class="w-[40px] h-[20px]"
+                            alt=""
+                          />
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-8 sl:w-7/12 sl:order-[-1]">
+              <div class="flex flex-col gap-3 w-full">
+                <div>
+                  <h4 class="text-[20px] capitalize pb-2">
+                    <b>For faster checkout experience</b>
+                  </h4>
+                </div>
+                <div class="flex flex-col gap-4 zl:flex-row">
+                  <div class="zl:w-6/12">
+                    <button
+                      class="border border-[#EEEEEE] w-full rounded-sm flex justify-center"
+                    >
+                      <img
+                        src="/src/assets/paypal.svg"
+                        class="w-[80px] h-[61px]"
+                        alt=""
+                      />
+                    </button>
+                  </div>
+                  <div class="zl:w-6/12">
+                    <button
+                      class="border border-[#EEEEEE] w-full rounded-sm flex justify-center"
+                    >
+                      <img
+                        src="/src/assets/applepay.svg"
+                        class="w-[80px] h-[61px]"
+                        alt=""
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div class="leading-4">
+                  <span class="text-[12px]"
+                    >By continuing, I confirm that I have read and accept the
+                    <a href="" class="border-b-2 border-[#CCCCCC]"
+                      >Terms and Conditions.</a
+                    >
+                    and the
+                    <a href="" class="border-b-2 border-[#CCCCCC]"
+                      >Privacy Policy.</a
+                    >
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <div class="pt-2">
+                  <div class="border border-[#EEEEEE] bg-[#EEEEEE] my-8">
+                    <h3 class="text-[20px] uppercase px-3 py-3">
+                      <span>1. Shipping & Billing</span>
+                    </h3>
+                  </div>
+                </div>
+                <div>
+                  <h2 class="text-[20px] capitalize">
+                    <span>Enter a Shipping Address</span>
+                  </h2>
+                </div>
+                <div class="pt-4">
+                  <div class="flex flex-col bl:flex-row bl:gap-4">
+                    <div class="flex flex-col gap-1.5 bl:w-6/12">
+                      <div>
+                        <b class="text-[12px] uppercase">First name</b>
+                        <span class="text-[12px] text-[#B62905]"><b>*</b></span>
+                      </div>
+                      <div class="border border-[#3B4047] rounded-sm">
+                        <input
+                          type="text"
+                          class="w-full outline-none px-3 py-4"
+                          placeholder="First name"
+                        />
+                      </div>
+                    </div>
+                    <div class="flex flex-col gap-1.5 pt-4 bl:pt-0 bl:w-6/12">
+                      <div>
+                        <b class="text-[12px] uppercase">Last name</b>
+                        <span class="text-[12px] text-[#B62905]"><b>*</b></span>
+                      </div>
+                      <div class="border border-[#3B4047] rounded-sm">
+                        <input
+                          type="text"
+                          class="w-full outline-none px-3 py-4"
+                          placeholder="Last name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1.5 pt-4">
+                    <div>
+                      <b class="text-[12px] uppercase"
+                        >Street Number and Name or P.O. BOX</b
+                      >
+                      <span class="text-[12px] text-[#B62905]"><b>*</b></span>
+                    </div>
+                    <div class="border border-[#3B4047] rounded-sm">
+                      <input
+                        type="text"
+                        class="w-full outline-none px-3 py-4"
+                        placeholder="Street Number and Name or P.O. BOX"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex flex-col gap-1.5 pt-4">
+                      <div>
+                        <b class="text-[12px] uppercase"
+                          >Specify Company, Apt, Suite, Unit</b
+                        >
+                        <span class="text-[12px] text-[#B62905]"><b>*</b></span>
+                      </div>
+                      <div class="border border-[#3B4047] rounded-sm">
+                        <input
+                          type="text"
+                          class="w-full outline-none px-3 py-4"
+                          placeholder="Specify Company, Apt, Suite, Unit"
+                        />
+                      </div>
+                    </div>
+                    <div class="flex flex-col bl:flex-row bl:gap-4">
+                      <div class="flex flex-col gap-1.5 pt-4 bl:w-6/12">
+                        <div>
+                          <b class="text-[12px] uppercase">City</b>
+                          <span class="text-[12px] text-[#B62905]"
+                            ><b>*</b></span
+                          >
+                        </div>
+                        <div class="border border-[#3B4047] rounded-sm">
+                          <input
+                            type="text"
+                            class="w-full outline-none px-3 py-4"
+                            placeholder="City"
+                          />
+                        </div>
+                      </div>
+                      <div class="flex flex-col gap-1.5 pt-4 bl:w-6/12">
+                        <div>
+                          <b class="text-[12px] uppercase">Postal code</b>
+                          <span class="text-[12px] text-[#B62905]"
+                            ><b>*</b></span
+                          >
+                        </div>
+                        <div class="border border-[#3B4047] rounded-sm">
+                          <input
+                            type="text"
+                            class="w-full outline-none px-3 py-4"
+                            placeholder="Postal code"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col bl:flex-row bl:gap-4">
+                      <div class="flex flex-col gap-1.5 pt-4 bl:w-6/12">
+                        <div>
+                          <b class="text-[12px] uppercase">State</b>
+                          <span class="text-[12px] text-[#B62905]"
+                            ><b>*</b></span
+                          >
+                        </div>
+                        <div class="border border-[#3B4047] rounded-sm">
+                          <input
+                            type="text"
+                            class="w-full outline-none px-3 py-4"
+                            placeholder="State"
+                          />
+                        </div>
+                      </div>
+                      <div class="flex flex-col gap-1.5 pt-4 bl:w-6/12">
+                        <div>
+                          <b class="text-[12px] uppercase">Country</b>
+                          <span class="text-[12px] text-[#B62905]"
+                            ><b>*</b></span
+                          >
+                        </div>
+                        <div class="border border-[#3B4047] rounded-sm">
+                          <input
+                            type="text"
+                            class="w-full outline-none px-3 py-4"
+                            placeholder="Country"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <div class="mt-8 mb-6">
+                  <h2 class="text-[20px] capitalize">
+                    <span>Enter Contact Info</span>
+                  </h2>
+                </div>
+                <div>
+                  <div class="flex flex-col bl:flex-row bl:gap-4">
+                    <div class="flex flex-col gap-1.5 bl:w-6/12">
+                      <div>
+                        <b class="text-[12px] uppercase">Email</b>
+                        <span class="text-[12px] text-[#B62905]"><b>*</b></span>
+                      </div>
+                      <div class="border border-[#3B4047] rounded-sm">
+                        <input
+                          type="email"
+                          class="w-full outline-none px-3 py-4"
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+                    <div class="flex flex-col gap-1.5 pt-4 bl:pt-0 bl:w-6/12">
+                      <div>
+                        <b class="text-[12px] uppercase">Phone Number</b>
+                        <span class="text-[12px] text-[#B62905]"><b>*</b></span>
+                      </div>
+                      <div class="border border-[#3B4047] rounded-sm">
+                        <input
+                          type="number"
+                          class="w-full outline-none px-3 py-4"
+                          placeholder="Phone Number"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-4 pt-4">
+                    <input
+                      type="checkbox"
+                      class="appearance-none w-5 h-5 border border-[#3B4047] rounded-sm bg-white checked:bg-black checked:border-black checked:text-white"
+                    />
+                    <span class="text-[16px]"
+                      >Please send me SMS shipping updates about my order</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="pt-2">
+                <div>
+                  <div class="mt-8 mb-6">
+                    <h2 class="text-[20px] capitalize">
+                      <span>Select a Shipping Method</span>
+                    </h2>
+                  </div>
+                </div>
+                <div class="border-b border-[#E5E7EB] pb-2">
+                  <input type="checkbox" class="appearance-none relative" />
+                  <div class="flex items-start justify-start">
+                    <div class="w-1/12">
+                      <div
+                        class="border-2 border-[#676D75] w-6 h-6 rounded-full"
+                      ></div>
+                    </div>
+                    <div class="flex justify-between items-center w-11/12">
+                      <div class="flex flex-col leading-5">
+                        <b class="text-[14px] text-[#191919]">Standard</b>
+                        <span class="text-[#696969] text-[12px]"
+                          >Estimated arrival: 23 Jan</span
+                        >
+                      </div>
+                      <div>
+                        <span class="text-[14px]">$0.00</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="border-b border-[#E5E7EB] pb-2">
+                  <input type="checkbox" class="appearance-none relative" />
+                  <div class="flex items-start justify-start">
+                    <div class="w-1/12">
+                      <div
+                        class="border-2 border-[#676D75] w-6 h-6 rounded-full"
+                      ></div>
+                    </div>
+                    <div class="flex justify-between items-center w-11/12">
+                      <div class="flex flex-col leading-5">
+                        <b class="text-[14px] text-[#191919]">Expedited</b>
+                        <span class="text-[#696969] text-[12px]"
+                          >Estimated arrival: 22 Jan</span
+                        >
+                      </div>
+                      <div>
+                        <span class="text-[14px]">$20.00</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pb-2">
+                  <input type="checkbox" class="appearance-none relative" />
+                  <div class="flex items-start justify-start">
+                    <div class="w-1/12">
+                      <div
+                        class="border-2 border-[#676D75] w-6 h-6 rounded-full"
+                      ></div>
+                    </div>
+                    <div class="flex justify-between items-center w-11/12">
+                      <div class="flex flex-col leading-5">
+                        <b class="text-[14px] text-[#191919]"
+                          >Next Business Day</b
+                        >
+                        <span class="text-[#696969] text-[12px]"
+                          >Estimated arrival: 17 Jan</span
+                        >
+                      </div>
+                      <div>
+                        <span class="text-[14px]">$30.00</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="mt-8 mb-6">
+                  <h2 class="text-[20px] capitalize">
+                    <span>Enter a Billing Address</span>
+                  </h2>
+                </div>
+                <div class="flex items-start gap-4">
+                  <input
+                    type="checkbox"
+                    class="appearance-none w-5 h-5 border border-[#3B4047] rounded-sm bg-white checked:bg-black checked:border-black checked:text-white"
+                  />
+                  <span class="text-[16px]"
+                    >Billing and Shipping details are the same</span
+                  >
+                </div>
+                <div class="pt-8">
+                  <button
+                    class="border border-[#191919] bg-[#191919] text-white uppercase w-full py-4 rounded-sm"
+                  >
+                    Continue to payment
+                  </button>
+                </div>
+                <div class="leading-4 pt-2">
+                  <span class="text-[12px]"
+                    >By continuing, I confirm that I have read and accept the
+                    <a href="" class="border-b-2 border-[#CCCCCC]"
+                      >Terms and Conditions.</a
+                    >
+                    and the
+                    <a href="" class="border-b-2 border-[#CCCCCC]"
+                      >Privacy Policy.</a
+                    >
+                  </span>
+                </div>
+                <div class="pt-2">
+                  <div class="border border-[#EEEEEE] bg-[#EEEEEE] mt-4">
+                    <h3 class="text-[20px] uppercase px-3 py-3">
+                      <span>2. Pay</span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer id="checkoutFooter" class="bg-[#181818]">
+      <div class="wrapper1">
+        <div class="border-b border-[#444444] pb-10">
+          <div class="flex gap-6 items-center pt-6">
+            <div>
+              <img src="/src/assets/logocheckout.svg" alt="" />
+            </div>
+            <div>
+              <span class="text-[#E7E7E7]">© PUMA North America, Inc.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="/src/js/layout.js"></script>
+    <script type="module" src="/src/js/checkout.js"></script>
+  </body>
+</html>

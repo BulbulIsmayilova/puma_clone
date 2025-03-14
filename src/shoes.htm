@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+      .custom-select {
+        appearance: none; /* Webkit için */
+        -webkit-appearance: none; /* Safari/Chrome için */
+        -moz-appearance: none; /* Firefox için */
+        border: 1px solid #3b4047;
+        border-radius: 2px;
+        padding-right: 4.5rem; /* Sağdaki özel ok için boşluk */
+        padding-left: 0.8rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        position: relative;
+        background-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div
+      id="searchContainer"
+      class="fixed -z-1 invisible inset-0 opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="signinContainer"
+      class="fixed -z-[10] top-20 right-4 w-full opacity-0 duration-150 max-w-[320px] max-h-[400px] rounded-sm"
+    ></div>
+
+    <div
+      id="lgContainer"
+      class="fixed top-[88px] left-0 bottom-0 right-0 z-[-1] opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="sideContainer"
+      class="fixed -z-1 invisible inset-0 duration-300 opacity-0"
+    ></div>
+    <!-- Header -->
+
+    <div
+      id="FilterContainer"
+      class="fixed z-[-1] bg-[#00000080] opacity-0 invisible inset-0 duration-300"
+    >
+      <div id="FilterBar" class="bg-white max-w-[450px] w-full h-screen">
+        <div class="wrapper">
+          <div class="flex justify-between items-center p-3">
+            <h1 class="text-[20px] leading-6 capitalize text-[#191919]">
+              <b>Product filters</b>
+            </h1>
+            <button onclick="toggleFilterAccordion()">
+              <img
+                src="/src/assets/xmark.svg"
+                class="w-[25px] h-[25px]"
+                alt=""
+              />
+            </button>
+          </div>
+        </div>
+        <div class="border-b border-[#E5E7EB]"></div>
+        <div class="wrapper h-[88vh] relative">
+          <div class="flex flex-col justify-between">
+            <div class="px-3">
+              <div class="accordionContent border-b border-[#E5E7EB]">
+                <button onclick="toggleFilterİnsideAccordion(0)" class="flex justify-between items-center w-full">
+                  <span class="text-[18px] text-[#181818] tracking-wide"
+                    >Size</span
+                  >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-down accordionIcon"
+                  >
+                    <path d="m6 9 6 6 6-6" /> 
+                  </svg>
+                </button>
+                <div class="filteraccordion-content my-3 opacity-0 max-h-0 invisible">
+                  <div class="py-4">
+                    <button class="flex gap-1 justify-center items-center">
+                      <b class="text-[12px] text-[#181818]">Clear</b
+                      ><i
+                        class="fa-solid fa-circle-xmark w-[14px] h-[14px]"
+                      ></i>
+                    </button>
+                  </div>
+                  <div
+                    id="FilterSizeContainer"
+                    class="flex flex-wrap items-center"
+                  ></div>
+                </div>
+              </div>
+              <div class="accordionContent border-b border-[#E5E7EB] pt-4">
+                <button onclick="toggleFilterİnsideAccordion(1)" class="flex justify-between items-center w-full">
+                  <span class="text-[18px] text-[#181818] tracking-wide"
+                    >Price</span
+                  >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-chevron-down accordionIcon"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+                <div class="filteraccordion-content my-3 opacity-0 max-h-0 invisible">
+                  <div class="flex gap-4 pt-4">
+                    <div
+                      class="border border-[#3B4047] flex justify-center items-center rounded-sm"
+                    >
+                      <span class="pl-2 pr-2">$</span>
+                      <input
+                        type="number"
+                        placeholder="min price..."
+                        name=""
+                        onblur="changeProduct('min')"
+                        id="minPriceValue"
+                        class="py-4 rounded-sm w-full outline-none"
+                      />
+                    </div>
+                    <div
+                      class="border border-[#3B4047] flex justify-center items-center rounded-sm"
+                    >
+                      <span class="pl-2 pr-2">$</span>
+                      <input
+                        type="number"
+                        name=""
+                        placeholder="max price..."
+                        onblur="changeProduct('max')"
+                        id="maxPriceValue"
+                        class="py-4 rounded-sm w-full outline-none"
+                      />
+                    </div>
+                  </div>
+
+            
+
+                </div>
+              </div>
+            </div>
+
+            <button
+              id="filterBtn"
+              class="py-4 absolute block right-4 bottom-0 left-4 z-[999] rounded-sm tracking-wide text-[18px] bg-[#191919] text-white uppercase"
+            >
+              <b>show products</b>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="sticky top-0 right-0 left-0 z-[900]"></header>
+    <main>
+      <div class="min-h-[50vh]">
+        <div class="wrapper">
+          <div class="flex sl:hidden">
+            <a href=""
+              ><div class="flex gap-1 justify-start items-center">
+                <div>
+                  <img src="/src/assets/rightdetail.svg" alt="" />
+                </div>
+                <div>
+                  <b>Shoes</b>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="hidden sl:flex">
+            <div class="pt-2">
+              <ul class="flex justify-center items-center gap-8">
+                <li>
+                  <a href=""><b class="text-[#191919]">Home</b></a>
+                </li>
+                <li class="list-disc text-[#8C9198] tracking-wider">
+                  <a href=""><b class="text-[#191919] px-2">Sale</b></a>
+                </li>
+                <li class="list-disc text-[#8C9198] tracking-wider">
+                  <a href=""><b class="text-[#191919] px-2">Women's Sale</b></a>
+                </li>
+                <li class="list-disc text-[#8C9198] tracking-wider">
+                  <a href=""><b class="text-[#191919] px-2">Shoes</b></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="CategoryTitle" class="pt-4 sm:pt-6 sm:pb-2"></div>
+        </div>
+
+        <div class="border-y border-[#E5E7EB]">
+          <div class="wrapper">
+            <div class="flex justify-between items-center gap-6 py-1">
+              <div class="border border-[#A1A8AF] rounded-sm inline-block">
+                <button
+                  onclick="toggleFilterAccordion()"
+                  class="flex justify-center items-center gap-3 py-2 px-4 w-full"
+                >
+                  <p class="uppercase text-[16px]"><b>Filters</b></p>
+                  <img src="/src/assets/filter.svg" alt="" />
+                </button>
+              </div>
+              <div class="relative border border-[#A1A8AF] rounded-sm">
+                <select
+                  name=""
+                  id=""
+                  class="appearance-none outline-none py-2 pl-4 w-full uppercase"
+                >
+                  <option value="">Sort by</option>
+                  <option value="">Price Low To High</option>
+                  <option value="">Price High To High</option>
+                  <option value="">Newest</option>
+                  <option value="">Top Sellers</option>
+                </select>
+                <div class="down absolute top-[50%] left-24 -translate-y-[50%]">
+                  <img src="/src/assets/downabsolute.svg" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper">
+          <div>
+            <div class="py-2">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h4 class="text-[18px] bl:text-[20px] uppercase">
+                    <b><b id="lengthProduct">283</b> Products</b>
+                  </h4>
+                </div>
+                <div class="flex items-center gap-3 sl:gap-1">
+                  <button onclick="changeView(1)">
+                    <div class="zl:hidden">
+                      <img src="/src/assets/squaer.svg" alt="" />
+                    </div>
+                  </button>
+                  <button onclick="changeView(2)">
+                    <div>
+                      <img src="/src/assets/gris.svg" alt="" />
+                    </div>
+                  </button>
+                  <button onclick="changeView(3)">
+                    <div class="hidden zl:flex sl:hidden">
+                      <img src="/src/assets/gridpro.svg" alt="" />
+                    </div>
+                  </button>
+                  <button onclick="changeView(4)">
+                    <div class="hidden sl:flex">
+                      <img src="/src/assets/ultragrid.svg" alt="" />
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id="productContainer" class="flex flex-wrap"></div>
+          </div>
+          <div class="pt-8">
+            <button
+              id="paginationBtn"
+              class="border border-[#191919] bg-[#191919] w-full py-4 rounded-sm"
+            >
+              <b class="text-[16px] text-white uppercase"
+                >load more</b
+              >
+            </button>
+            <p class="text-[16px] text-[#181818] pt-4 w-full">
+              <span
+                >Meet the next generation of classic. We’ve been kicking around
+                since 1948, breaking the rules and changing the game with
+                instantly iconic silhouettes just as timeless as they are
+                inherently versatile. These innovative classics push the limits
+                of design, fusing lifestyle with function for an inventive
+                approach to traditional streetwear. Our vintage Suedes have
+                continued to stand the test of time, owning the intersection
+                between sport and culture for over 50 years with updated
+                colorways and bold design details to keep things fresh. Mayze,
+                Mayu, and Cali silhouettes fuse PUMA design DNA with a
+                street-forward take on the latest trends – putting a
+                contemporary twist on what it means to be a classic, and turning
+                heads with higher-than-ever stacked soles. <br />
+                No matter the time, place, or trend – there’s a PUMA to match.
+                Explore our lineup of classics and find your perfect fit with
+                one of our favorite streetwear silhouettes. This is more than
+                just same old, same old – these are PUMA Classics.
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-[#181818]"></footer>
+    <script type="module" src="/src/js/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="services/api.js"></script>
+    <script type="module" src="/src/js/shoes.js"></script>
+  </body>
+</html>

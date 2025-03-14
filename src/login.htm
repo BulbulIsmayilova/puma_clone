@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link rel="stylesheet" href="/src/input.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      .custom-select {
+        appearance: none; /* Webkit için */
+        -webkit-appearance: none; /* Safari/Chrome için */
+        -moz-appearance: none; /* Firefox için */
+        border: 1px solid #3b4047;
+        border-radius: 2px;
+        padding-right: 4.5rem; /* Sağdaki özel ok için boşluk */
+        padding-left: 0.8rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        position: relative;
+        background-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div
+      id="searchContainer"
+      class="fixed -z-1 invisible inset-0 opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="signinContainer"
+      class="fixed -z-[10] top-20 right-4 w-full opacity-0 duration-150 max-w-[320px] max-h-[400px] rounded-sm"
+    ></div>
+
+    <div
+      id="lgContainer"
+      class="fixed top-[88px] left-0 bottom-0 right-0 z-[-1] opacity-0 duration-300"
+    ></div>
+
+    <div
+      id="sideContainer"
+      class="fixed -z-1 invisible inset-0 duration-300 opacity-0"
+    ></div>
+    <!-- Header -->
+
+    <div
+      id="SizeContainer"
+      class="fixed -z-[10] bg-[#00000080] inset-0 flex items-center justify-center py-5 bl:py-2 md:py-0 px-4 opacity-0 visible duration-300"
+    ></div>
+
+    <div
+      id="deleteContainer"
+      class="fixed -z-[10] bg-[#00000080] inset-0 py-[140px] hl:py-40 rounded-md px-4 visible opacity-0"
+    ></div>
+
+    <div
+      id="forgotContainer"
+      class="bg-[#00000080] -z-[10] opacity-0 visible fixed inset-0 flex items-center justify-center px-4 overflow-y-auto"
+    >
+      <div
+        id="forgotBar"
+        class="bg-white rounded-md pt-6 max-w-[450px] pb-16 zl:pb-3"
+      >
+        <div class="wrapper relative">
+          <button
+            onclick="showforgotContainer()"
+            class="absolute top-0 right-5 border border-transparent hover:border-[#ccc] hover:bg-[#ccc] rounded-[50%] p-3"
+          >
+            <img src="/src/assets/xmark.svg" alt="" />
+          </button>
+          <h1 class="text-[20px] uppercase text-center pt-4">
+            <b>Forgotten your password?</b>
+          </h1>
+          <div class="flex flex-col gap-6">
+            <div class="pt-2">
+              <p class="text-[16px]">
+                <span
+                  >Please provide your account email address to receive an email
+                  to reset your password.</span
+                >
+              </p>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div>
+                <span class="text-[12px] uppercase"><b>Email</b></span>
+                <span class="text-[#B62905] text-[12px]"><b>*</b></span>
+              </div>
+              <div class="border border-[#3B4047] rounded-sm">
+                <input
+                  type="email"
+                  name=""
+                  placeholder="Email"
+                  id=""
+                  class="pl-4 py-4 rounded-sm w-full outline-[#8C9198]"
+                />
+              </div>
+            </div>
+            <div>
+              <button
+                class="w-full uppercase text-[18px] rounded-sm border border-[#191919] bg-[#191919] text-white py-3"
+              >
+                <b>submit</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="sticky top-0 right-0 left-0 z-[900]"></header>
+    <main>
+      <div class="min-h-[50vh]">
+        <div class="wrapper">
+          <div class="mx-auto max-w-[1024px]">
+            <h1 class="text-[32px] bl:text-[48px]">
+              <b class="tracking-wide">My account</b>
+            </h1>
+          </div>
+
+          <div class="flex max-w-[512px] mx-auto pt-8">
+            <button
+              id="loginBtn"
+              onclick="showlogincontainer()"
+              class="w-6/12 text-[16px] bl:text-[20px] border-b-2 border-[#181818] pb-2"
+            >
+              <b>Login</b>
+            </button>
+            <button
+              id="joinBtn"
+              onclick="showlogincontainer()"
+              class="w-6/12 text-[16px] bl:text-[20px] border-b-2 border-[#E5E7EB] pb-2"
+            >
+              <span>Join Us</span>
+            </button>
+          </div>
+
+          <div
+            id="logincontainer"
+            class="flex flex-col gap-6 max-w-[1024px] mx-auto sl:pt-4 pb-24"
+          >
+            <div class="max-w-[512px] mx-auto">
+              <div class="pt-4">
+                <div class="flex flex-col gap-4">
+                  <div class="flex flex-col gap-2">
+                    <div>
+                      <span class="text-[12px] uppercase"><b>Email</b></span>
+                      <span class="text-[#B62905] text-[12px]"><b>*</b></span>
+                    </div>
+                    <div class="border border-[#3B4047] rounded-sm">
+                      <input
+                        type="email"
+                        name=""
+                        placeholder="Email"
+                        id="loginEmail"
+                        class="pl-4 py-4 rounded-sm w-full outline-[#8C9198]"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <div>
+                      <span class="text-[12px] uppercase"><b>Password</b></span>
+                      <span class="text-[#B62905] text-[12px]"><b>*</b></span>
+                    </div>
+                    <div class="border border-[#3B4047] relative rounded-sm">
+                      <input
+                        type="password"
+                        name=""
+                        placeholder="Password"
+                        id="loginPassword"
+                        class="pl-4 py-4 rounded-sm w-full outline-[#8C9198]"
+                      />
+                      <div id="togglePassword"
+                        class="pr-4 absolute top-[10%] translate-y-[50%] right-1"
+                      >
+                        <img id="eyeIcon" src="/src/assets/eye.svg" alt="" />
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-4 pt-4">
+                <div class="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    class="w-[16px] h-[16px] border-2 border-[#676D75]"
+                  />
+                  <p class="text-[16px]">
+                    <span>Remember me on this computer</span>
+                  </p>
+                </div>
+                <div>
+                  <button onclick="login()"
+                  id="LoginBtn"
+                    class="border border-[#BDC1C5] bg-[#BDC1C5] uppercase w-full py-4 rounded-sm"
+                  >
+                    <b class="text-[#3B4047]">login</b>
+                  </button>
+                </div>
+                <div>
+                  <p class="text-[12px]">
+                    <span
+                      >By continuing, I confirm that I have read and accept the
+                      <a href="" class="border-b-2 border-[#CCCCCC]"
+                        >Terms and Conditions.</a
+                      >
+                      and the
+                      <a href="" class="border-b-2 border-[#CCCCCC]"
+                        >Privacy Policy.</a
+                      >
+                    </span>
+                  </p>
+                </div>
+                <div>
+                  <button onclick="showforgotContainer()">
+                    <b class="border-b-2 border-[#A1A8AF] uppercase text-[14px]"
+                      >Forgotten your password?</b
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="joincontainer"
+            class="max-w-[1024px] mx-auto sl:pt-4 pb-24 hidden"
+          >
+            <div class="max-w-[512px] mx-auto">
+              <div class="pt-4">
+                <div class="flex flex-col gap-4">
+                  <div class="flex flex-col gap-2">
+                    <div>
+                      <span class="text-[12px] uppercase"
+                        ><b>First name</b></span
+                      >
+                      <span class="text-[#B62905] text-[12px]"><b>*</b></span>
+                    </div>
+                    <div class="border border-[#3B4047] rounded-sm">
+                      <input
+                        type="text"
+                        name=""
+                        placeholder="First Name"
+                        id="registerFirstName"
+                        class="pl-4 py-4 rounded-sm w-full outline-[#8C9198]"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <div>
+                      <span class="text-[12px] uppercase"
+                        ><b>Last name</b></span
+                      >
+                      <span class="text-[#B62905] text-[12px]"><b>*</b></span>
+                    </div>
+                    <div class="border border-[#3B4047] rounded-sm">
+                      <input
+                        type="text"
+                        name=""
+                        placeholder="Last Name"
+                        id="registerLastName"
+                        class="pl-4 py-4 rounded-sm w-full outline-[#8C9198]"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <div>
+                      <span class="text-[12px] uppercase"><b>Email</b></span>
+                      <span class="text-[#B62905] text-[12px]"><b>*</b></span>
+                    </div>
+                    <div class="border border-[#3B4047] rounded-sm">
+                      <input
+                        type="email"
+                        name=""
+                        placeholder="Email"
+                        id="registerEmail"
+                        class="pl-4 py-4 rounded-sm w-full outline-[#8C9198]"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <div>
+                      <span class="text-[12px] uppercase"><b>Password</b></span>
+                      <span class="text-[#B62905] text-[12px]"><b>*</b></span>
+                    </div>
+                    <div class="border border-[#3B4047] relative rounded-sm">
+                      <input
+                        type="password"
+                        name=""
+                        placeholder="Password"
+                        id="registerPassword"
+                        class="pl-4 py-4 rounded-sm w-full outline-[#8C9198]"
+                      />
+                      <div
+                       id="togglePasswordRegister"  class="pr-4 absolute top-[10%] translate-y-[50%] right-1"
+                      >
+                        <img id="secondeyeicon" src="/src/assets/eye.svg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-4 pt-4">
+                <div class="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    class="w-[16px] h-[16px] border-2 border-[#676D75]"
+                  />
+                  <p class="text-[16px]">
+                    <span>Add me to the PUMA mailing list</span>
+                  </p>
+                </div>
+                <div>
+                  <button
+                    onclick="register()"
+                    id="registerBtn"
+                    class="border border-[#BDC1C5] bg-[#BDC1C5] uppercase w-full py-4 rounded-sm"
+                  >
+                    <b class="text-[#3B4047]">Create account</b>
+                  </button>
+                </div>
+                <div>
+                  <p class="text-[12px]">
+                    <span
+                      >By continuing, I confirm that I have read and accept the
+                      <a href="" class="border-b-2 border-[#CCCCCC]"
+                        >Terms and Conditions.</a
+                      >
+                      and the
+                      <a href="" class="border-b-2 border-[#CCCCCC]"
+                        >Privacy Policy.</a
+                      >
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-[#181818]"></footer>
+    <script type="module" src="/src/js/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="services/api.js"></script>
+    <script type="module" src="/src/js/login.js"></script>
+  </body>
+</html>
