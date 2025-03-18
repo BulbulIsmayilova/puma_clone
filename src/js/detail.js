@@ -9,11 +9,11 @@ const DescriptionInfo = document.getElementById("DescriptionInfo");
 const scrollButton = document.getElementById("scrollButton");
 const DetailInfo = document.getElementById("DetailInfo");
 const main = document.querySelector("main");
-const countValue = document.getElementById("countValue")
-
+const countValue = document.getElementById("countValue");
+const detailBreadCrumb = document.getElementById("detailBreadCrumb");
 
 let variant = null;
-let basket = []
+let basket = [];
 
 let RESPONSE = null;
 let Details = null;
@@ -29,25 +29,24 @@ let swiper = new Swiper(".mySwiper", {
 const swiperSlidedetail = document.getElementById("swiper-slidedetail");
 
 window.goWhislist = () => {
+  let wish = localStorage.getItem("wish");
 
-  let wish = localStorage.getItem("wish") 
-
-  if(!wish){
-    wish = []
-  }else{
-    wish = JSON.parse(wish)
+  if (!wish) {
+    wish = [];
+  } else {
+    wish = JSON.parse(wish);
   }
 
   let obj = {
     ...variant,
-    productId : RESPONSE._id,
-    productTitle : RESPONSE.title
-  }
-  
-  wish.push(obj)
+    productId: RESPONSE._id,
+    productTitle: RESPONSE.title,
+  };
 
-  localStorage.setItem("wish", JSON.stringify(wish))
-}
+  wish.push(obj);
+
+  localStorage.setItem("wish", JSON.stringify(wish));
+};
 
 function showsliderdetail(data) {
   data.map(
@@ -66,14 +65,42 @@ async function getData() {
   let product_slug = params.get("product_slug");
   let variant_slug = params.get("slug");
   let response = await Product.getBySlug(product_slug);
- 
+
+  if (!response) {
+    return;
+  }
+
+  let breadCrumbCategory = "";
+
+  response.categories.map(
+    (item) =>
+      (breadCrumbCategory += `
+       <li class="list-disc text-[#8C9198] tracking-wider">
+                  <a href="shoes.htm?category=${item.slug}"><b class="text-[#191919] px-2">${item.name}</b></a>
+                </li>
+    `)
+  );
+
+  let title = response.title.toLowerCase()
+
+  detailBreadCrumb.innerHTML = `
+                <li>
+                  <a href="/src/index.htm"><b class="text-[#191919]">Home</b></a>
+                </li>
+                ${breadCrumbCategory}
+                <li class="list-disc capitalize text-[#8C9198] tracking-wider">
+                  ${title}
+                </li>
+  `;
+
+  console.log(response)
   if (!product_slug) {
     main.innerHTML = "salam";
     return;
   }
 
-  let result = response.variants.find((item) => item.slug === variant_slug);  
-  
+  let result = response.variants.find((item) => item.slug === variant_slug);
+
   DescriptionInfo.innerText += `${response.description}`;
 
   Details = response.details;
@@ -124,7 +151,6 @@ async function getData() {
 getData();
 
 const getLikeProduct = async (product) => {
-  
   let filter = {
     categories: [product.categories[0]._id],
   };
@@ -135,15 +161,13 @@ const getLikeProduct = async (product) => {
 };
 
 const getSecondSliderPro = async (product) => {
-
   if (product.categories.length === 1) {
-    return
-  } 
-  
+    return;
+  }
+
   let filter = {
     categories: [product.categories[1]._id],
   };
-  
 
   let response = await Product.list(filter);
 
@@ -307,46 +331,55 @@ function showDetailSlider(data, type = "") {
     variant.push(...kod);
   });
 
-  variant.map(
-    
-    (item) =>
-      {
-        let price = 0;
+  variant.map((item) => {
+    let price = 0;
 
-        if (item.discount) {
-          if (item.discountType === "percentage") {
-            price = item.price - (item.price * item.discount) / 100;
-          } else {
-            price = item.price - item.discount;
-          }
-        } else {
-          price = item.price;
-        }
-        
-        tag += `
+    if (item.discount) {
+      if (item.discountType === "percentage") {
+        price = item.price - (item.price * item.discount) / 100;
+      } else {
+        price = item.price - item.discount;
+      }
+    } else {
+      price = item.price;
+    }
+
+    tag += `
         <div class="swiper-slide">
-        <a href="detail.htm?product_slug=${item.productSlug}&slug=${item.slug}" class=" block cursor-pointer">
+        <a href="detail.htm?product_slug=${item.productSlug}&slug=${
+      item.slug
+    }" class=" block cursor-pointer">
           <div class="w-full my-4">
-            <img src="${item.images[0]?.url}" class="w-full h-full object-cover " alt="" />
+            <img src="${
+              item.images[0]?.url
+            }" class="w-full h-full object-cover " alt="" />
           </div>
           <div class="pt-4 text-left">
             <div>
-              <h3 class="text-[14px] leading-5  "> <b>${item.productTitle}</b></h3>
-              <span class="text-[16px] sm:text-[16px]  leading-6 text-[#676d75d9]">${item.productCategory}</span>
+              <h3 class="text-[14px] leading-5  "> <b>${
+                item.productTitle
+              }</b></h3>
+              <span class="text-[16px] sm:text-[16px]  leading-6 text-[#676d75d9]">${
+                item.productCategory
+              }</span>
             </div>
             <div>
-                  <h4 class="text-[14px] hl:text-[16px] text-[#BA2B20] ${item.discount ? "flex" :"hidden" }"><b>$${price}.00</b></h4>
-                          <h4 class="text-[14px] hl:text-[16px] text-[#8C8C8C] ${item.discount ? "flex" :"hidden" }"><a class="line-through">$${item.price}.00</a></h4>
-                          <h4 class="text-[14px] hl:text-[16px] leading-6 pt-3 sl:pt-0 ${item.discount ? "hidden" : "flex"} "> <b>$${
-                            item.price
-                          }.00</b></h4> 
+                  <h4 class="text-[14px] hl:text-[16px] text-[#BA2B20] ${
+                    item.discount ? "flex" : "hidden"
+                  }"><b>$${price}.00</b></h4>
+                          <h4 class="text-[14px] hl:text-[16px] text-[#8C8C8C] ${
+                            item.discount ? "flex" : "hidden"
+                          }"><a class="line-through">$${item.price}.00</a></h4>
+                          <h4 class="text-[14px] hl:text-[16px] leading-6 pt-3 sl:pt-0 ${
+                            item.discount ? "hidden" : "flex"
+                          } "> <b>$${item.price}.00</b></h4> 
             </div>
           </div>
         </a>
         </div>
   
- `}
-  );
+ `;
+  });
 
   if (type.length > 0) {
     swiperSlideDetail.innerHTML = tag;
@@ -355,26 +388,23 @@ function showDetailSlider(data, type = "") {
   }
 }
 
-
 window.goBasket = async () => {
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
-  if(!token){
-    location.href = '/src/login.htm'
-    return
+  if (!token) {
+    location.href = "/src/login.htm";
+    return;
   }
 
   let obj = {
     list: {
       productId: RESPONSE._id,
       variantId: variant._id,
-      count: countValue.value
-  }
-  }
+      count: countValue.value,
+    },
+  };
 
-  await Cart.update(obj, token)
-  
+  await Cart.update(obj, token);
 
-  location.href = '/src/shopping.htm'
-
-}
+  location.href = "/src/shopping.htm";
+};

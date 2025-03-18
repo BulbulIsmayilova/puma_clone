@@ -1,14 +1,15 @@
 import { Category, Product } from "../services/api.js";
 import { getVariant } from "../utils/get-variants.js";
 const filterBtn = document.getElementById("filterBtn");
-const lengthProduct = document.getElementById("lengthProduct")
-const paginationBtn = document.getElementById("paginationBtn")
+const lengthProduct = document.getElementById("lengthProduct");
+const categoryBreadCrumb = document.getElementById("categoryBreadCrumb");
+const paginationBtn = document.getElementById("paginationBtn");
 
 let swiper = null;
 let DATA = [];
 let sizes = [];
 
-let maxPage = 0
+let maxPage = 0;
 
 let view = null;
 
@@ -16,7 +17,7 @@ let minPrice = 0;
 let maxPrice = 10000;
 
 let filter = {
-  page : 1
+  page: 1,
 };
 
 function updateView() {
@@ -51,6 +52,10 @@ const getShoesCategory = async () => {
     (item) => item.slug.toLowerCase() === categoryName.toLowerCase()
   );
 
+  if (!category) return;
+
+  categoryBreadCrumb.innerText = category.name;
+
   filter.categories = category._id;
 
   if (category._id) {
@@ -61,31 +66,26 @@ const getShoesCategory = async () => {
 
   let products = await Product.list(filter);
 
-  paginationBtn.disabled = false
+  paginationBtn.disabled = false;
 
-  maxPage = Math.ceil(products.total / products.limit)
+  maxPage = Math.ceil(products.total / products.limit);
 
-  if(filter.page === maxPage){
-    paginationBtn.classList.add("hidden")
-  }else if(filter.page !== maxPage && paginationBtn.classList.contains("hidden")){
-    paginationBtn.classList.remove("hidden")
+  if (filter.page === maxPage) {
+    paginationBtn.classList.add("hidden");
+  } else if (
+    filter.page !== maxPage &&
+    paginationBtn.classList.contains("hidden")
+  ) {
+    paginationBtn.classList.remove("hidden");
   }
-
-  let PARENTID = [];
-
-  PARENTID = response.filter((item) => item.parentId === null);
 
   const CategoryTitle = document.getElementById("CategoryTitle");
 
-  PARENTID.map(
-    (item) =>
-      (CategoryTitle.innerHTML = ` <h1
-  class="text-[24px] bl:text-[28px] sl:text-[32px] uppercase leading-8 sl:py-4"
->
-  <b>${item.name}'s Classic Shoes and Sneakers</b>
-</h1>`)
-  );
-  DATA.push(...products.products)
+  CategoryTitle.innerHTML = ` 
+                  <h1 class="text-[24px] bl:text-[28px] sl:text-[32px] uppercase leading-8 sl:py-4">
+                   <b>${category.name}</b>
+                  </h1>`
+  DATA.push(...products.products);
   showswiperSlideshoes(DATA);
 };
 
@@ -115,16 +115,16 @@ function showInnerSlider(data, index) {
   );
 }
 
-paginationBtn.addEventListener("click", function(){
-  let page = filter.page
+paginationBtn.addEventListener("click", function () {
+  let page = filter.page;
 
-  page += 1
+  page += 1;
 
-  filter.page = page
+  filter.page = page;
 
-  paginationBtn.disabled = true
-  getShoesCategory()
-})
+  paginationBtn.disabled = true;
+  getShoesCategory();
+});
 
 function showswiperSlideshoes(data) {
   productContainer.innerHTML = "";
@@ -140,7 +140,7 @@ function showswiperSlideshoes(data) {
 
   let price = 0;
 
-  lengthProduct.innerText = variant.length
+  lengthProduct.innerText = variant.length;
 
   variant.map((item, index) => {
     if (item.discount) {
@@ -251,12 +251,11 @@ window.changeProduct = (type, value = "", index = 0) => {
 
     maxPrice = input.value;
   } else if (type === "size") {
-
-    const sizeBtns = FilterSizeContainer.querySelectorAll("button")
+    const sizeBtns = FilterSizeContainer.querySelectorAll("button");
     for (let i = 0; i < sizeBtns.length; i++) {
-      sizeBtns[i].classList.remove("active-size")
+      sizeBtns[i].classList.remove("active-size");
     }
-    sizeBtns[index].classList.add("active-size")
+    sizeBtns[index].classList.add("active-size");
     filter["specs.size"] = value;
   }
 

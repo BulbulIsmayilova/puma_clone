@@ -94,50 +94,65 @@ window.addToCard = async () => {
 
 const show = () => {
   contain.innerHTML = "";
-  if (wish.length === 0) return;
-
-  wish.map((item) => {
-    contain.innerHTML += `
-      <div class="flex flex-col zl:max-w-[650px] bl:max-w-[958px]">
-                <div
-                  class="flex gap-4 items-center py-4 zl:gap-4 bl:gap-7 md:gap-1"
-                >
-                  <div class="zl:w-4/12">
-                    <a href=""
-                      ><img
-                        src="${item.images[0].url}"
-                        class="max-w-[128px] max-h-[128px] hl:max-w-[192px] hl:max-h-[192px] zl:max-w-[208px] zl:max-h-[208px] bl:max-w-[256px] bl:max-h-[256px]"
-                        alt=""
-                    /></a>
-                  </div>
-                  <div class="flex flex-col gap-2 zl:w-8/12">
-                    <div>
-                      <h2
-                        class="text-[14px] hl:text-[16px] leading-3 hl:leading-5 zl:text-[20px]"
-                      >
-                        <b>${item.productTitle}</b>
-                      </h2>
-                      <p class="text-[12px] capitalize pt-2 zl:text-[14px] bl:text-[18px]">
-                        ${item.specs.color}
-                      </p>
+  if (wish.length === 0) {
+    contain.innerHTML +=`<div class="flex flex-col justify-center items-center p-40">
+      <span><img src="/src/assets/wishlisheart.svg"/></span>
+      <h1 class="text-[28px] text-[#181818] text-center leading-7 tracking-wide"><b>Your Wishlist is Empty<b/></h1>
+    </div>`
+  }else{
+    
+      wish.map((item) => {
+        contain.innerHTML += `
+          <div class="flex flex-col zl:max-w-[650px] bl:max-w-[958px]">
+                    <div
+                      class="flex gap-4 items-center py-4 zl:gap-4 bl:gap-7 md:gap-1"
+                    >
+                      <div class="zl:w-4/12">
+                        <a href=""
+                          ><img
+                            src="${item.images[0].url}"
+                            class="max-w-[128px] max-h-[128px] hl:max-w-[192px] hl:max-h-[192px] zl:max-w-[208px] zl:max-h-[208px] bl:max-w-[256px] bl:max-h-[256px]"
+                            alt=""
+                        /></a>
+                      </div>
+                      <div class="flex flex-col gap-2 zl:w-8/12">
+                        <div>
+                          <h2
+                            class="text-[14px] hl:text-[16px] leading-3 hl:leading-5 zl:text-[20px]"
+                          >
+                            <b>${item.productTitle}</b>
+                          </h2>
+                          <p class="text-[12px] capitalize pt-2 zl:text-[14px] bl:text-[18px]">
+                            ${item.specs.color}
+                          </p>
+                        </div>
+                        <div class="flex flex-col">
+                          <b class="uppercase text-[12px] zl:text-[14px]"
+                            >Size: <span>${item.specs.size}</span></b
+                          >
+                          <b class="uppercase text-[12px] zl:text-[14px]"
+                            >Price: <span> $${item.price}</span></b
+                          >
+                        </div>
+                        <div class="flex gap-4 zl:pt-4">
+                          <button
+                            onclick="deleteWish('${item._id}')"
+                            class="border border-transparent hover:border-[#D1D1D1] hover:bg-[#D1D1D1] p-3 rounded-[50%]"
+                          >
+                            <img src="/src/assets/trash.svg" alt="" />
+                          </button>
+                        </div>
+                        <div class="pt-3 pb-4 hidden zl:flex w-full zl:pb-0">
+                          <button
+                            onclick="showwhislistSideContainer('${item._id}')"
+                            class="w-full py-2 rounded-sm uppercase border border-[#191919] bg-[#191919] text-white"
+                          >
+                            <b>Add to Cart</b>
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <div class="flex flex-col">
-                      <b class="uppercase text-[12px] zl:text-[14px]"
-                        >Size: <span>${item.specs.size}</span></b
-                      >
-                      <b class="uppercase text-[12px] zl:text-[14px]"
-                        >Price: <span> $${item.price}</span></b
-                      >
-                    </div>
-                    <div class="flex gap-4 zl:pt-4">
-                      <button
-                        onclick="deleteWish('${item._id}')"
-                        class="border border-transparent hover:border-[#D1D1D1] hover:bg-[#D1D1D1] p-3 rounded-[50%]"
-                      >
-                        <img src="/src/assets/trash.svg" alt="" />
-                      </button>
-                    </div>
-                    <div class="pt-3 pb-4 hidden zl:flex w-full zl:pb-0">
+                    <div class="pt-3 pb-4 zl:hidden">
                       <button
                         onclick="showwhislistSideContainer('${item._id}')"
                         class="w-full py-2 rounded-sm uppercase border border-[#191919] bg-[#191919] text-white"
@@ -146,18 +161,10 @@ const show = () => {
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="pt-3 pb-4 zl:hidden">
-                  <button
-                    onclick="showwhislistSideContainer('${item._id}')"
-                    class="w-full py-2 rounded-sm uppercase border border-[#191919] bg-[#191919] text-white"
-                  >
-                    <b>Add to Cart</b>
-                  </button>
-                </div>
-              </div>
-    `;
-  });
+        `;
+      });
+
+  }
 };
 show();
 
