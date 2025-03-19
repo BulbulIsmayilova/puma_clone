@@ -4,6 +4,7 @@ const filterBtn = document.getElementById("filterBtn");
 const lengthProduct = document.getElementById("lengthProduct");
 const categoryBreadCrumb = document.getElementById("categoryBreadCrumb");
 const paginationBtn = document.getElementById("paginationBtn");
+const mobileCategoryName = document.getElementById("mobileCategoryName")
 
 let swiper = null;
 let DATA = [];
@@ -31,6 +32,10 @@ function updateView() {
   showswiperSlideshoes(DATA);
 }
 
+mobileCategoryName.onclick = function() {
+  window.history.back();
+};
+
 window.addEventListener("DOMContentLoaded", updateView);
 window.addEventListener("resize", updateView);
 
@@ -54,6 +59,7 @@ const getShoesCategory = async () => {
 
   if (!category) return;
 
+  mobileCategoryName.innerText = category.name
   categoryBreadCrumb.innerText = category.name;
 
   filter.categories = category._id;

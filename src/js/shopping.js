@@ -3,6 +3,7 @@ import { getVariant } from "../utils/get-variants.js";
 const myList = document.getElementById("myList");
 const listcount = document.getElementById("listcount");
 const TotalPriceContainer = document.getElementById("TotalPriceContainer");
+const shoppingContainer = document.getElementById("shoppingContainer");
 
 let deleteId = null;
 
@@ -67,7 +68,10 @@ const getShoppingSliderProduct = async () => {
 const showMyList = (data) => {
   myList.innerHTML = "";
   if(!data || data.length === 0){
-    return
+    myList.innerHTML+=`<div class="flex flex-col justify-center items-center py-40">
+      <span><img class="min-w-[115px] max-h-[115px]" src="/src/assets/shoppingCar.svg"/></span>
+      <h1 class="text-[28px] text-[#181818] text-center leading-7 tracking-wide pt-2 "><b class="w-full">Your Shopping Cart is Empty<b/></h1>
+    </div>`
   }
   data.map((item) => {
     let variant = item.productId.variants.find((v) => v._id === item.variantId);

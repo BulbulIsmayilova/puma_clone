@@ -134,7 +134,7 @@ function showlgContainer() {
   }
   lgContainer.innerHTML += `<div
         id="lgBar"
-        onmouseenter="showHover('${null}', false)"
+        onmouseenter="showHover('${null}', false, true)"
         onmouseleave="showHover('${null}', false)"
         class="min-h-[50%] bg-white shadow-xl overflow-y-auto"
       >
@@ -193,7 +193,7 @@ function showlink(data) {
 
 const lgBar = document.getElementById("lgBar");
 
-window.showHover = function (id = null, salam) {
+window.showHover = function (id = null, salam, type = false) {
   let data = null
   if(id){
     data = categoryData.find(item => item._id === id)
@@ -206,7 +206,7 @@ window.showHover = function (id = null, salam) {
   return
  }
 
-  if (lgContainer.classList.contains("side-act")) {
+  if (!type) {
     lgContainer.classList.remove("side-act");
     lgBar.classList.remove("side-act");
   } else {
@@ -511,7 +511,7 @@ function showCategorySide(data) {
   let kod = "";
   data.map(
     (item, index) =>
-      (kod += `<a href="shoes.htm?category=${item.slug}"><li onclick="showSecondBar()"  onmouseenter="showHover('${item._id}', true)" onmouseleave="showHover('${item._id }', true)" class="flex justify-between hover:border-b-2 hover:border-[#8a7350d9]  ${
+      (kod += `<a href="shoes.htm?category=${item.slug}"><li onclick="showSecondBar()"  onmouseenter="showHover('${item._id}', true, true)" onmouseleave="showHover('${item._id }', true)" class="flex justify-between hover:border-b-2 hover:border-[#8a7350d9]  ${
         index === 6 && "border-none"
       } items-center border-b border-[#E5E7EB] md:border-none py-8">
              <button >
